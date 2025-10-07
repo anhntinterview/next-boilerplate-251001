@@ -3,10 +3,14 @@ import path from "path";
 import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 
+<<<<<<< HEAD
 dotenv.config({
   path: path.resolve(process.cwd(), ".env"),
   override: false,
 });
+=======
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+>>>>>>> 0156483 (initial commit)
 
 /**
  * See https://playwright.dev/docs/test-configuration.

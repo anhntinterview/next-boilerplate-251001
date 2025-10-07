@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import path from "path";
 import fs from "fs-extra";
+=======
+import fs from "fs-extra";
+import path from "path";
+>>>>>>> 0156483 (initial commit)
 
 async function findDeepestStandalone(dir) {
   const entries = await fs.readdir(dir);
