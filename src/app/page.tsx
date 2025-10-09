@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Hello from "@/components/Hello";
 
 export default function Home() {
@@ -109,5 +110,14 @@ export default function Home() {
       </footer>
     </div>
 >>>>>>> 32d98d4 (Initial commit from Create Next App)
+=======
+import Hello from "@/components/Hello";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <Hello name="Developer" />;
+    </main>
+>>>>>>> 8a18953 (feat: create sample data)
   );
 }
