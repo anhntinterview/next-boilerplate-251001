@@ -30,7 +30,9 @@ jobs:
             npmscripts: lint,typecheck,format:check
             run_sonar_scan: true
         secrets:
-            sonar_token: ${{ secrets.SONAR_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     build-docker:
         name: Docker.Build
         uses: next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@v1

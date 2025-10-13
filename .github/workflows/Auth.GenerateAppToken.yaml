@@ -52,4 +52,4 @@ jobs:
                   fi
 
                   echo "✅ Token generated successfully."
-                  echo "github_app_token=$GITHUB_APP_TOKEN" >> $GITHUB_OUTPUT
+                  echo "github_app_token=$GITHUB_APP_TOKEN" >> "$GITHUB_OUTPUT"
