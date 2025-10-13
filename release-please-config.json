@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "group-pull-request-title-pattern": "chore(${scope}): release",
+=======
+  "group-pull-request-title-pattern": "chore${scope}: release",
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
   "release-type": "node",
   "include-component-in-tag": false,
   "packages": {
@@ -49,12 +53,20 @@
     {
       "type": "test",
       "section": "Tests",
+<<<<<<< HEAD
       "hidden": true
+=======
+      "hidden": "true"
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
     },
     {
       "type": "ci",
       "section": "Continuous Integration",
+<<<<<<< HEAD
       "hidden": true
+=======
+      "hidden": "true"
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
     }
   ]
 }

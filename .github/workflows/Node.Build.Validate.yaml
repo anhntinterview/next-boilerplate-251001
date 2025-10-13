@@ -1,5 +1,6 @@
 name: Node.Build.Validate
 on:
+<<<<<<< HEAD
   workflow_call:
     inputs:
       node_version:
@@ -45,3 +46,47 @@ jobs:
       image_tag: v0.1.0
       run_docker_publish: true
       image_subdirectory: .
+=======
+    workflow_dispatch:
+    push:
+        branches:
+            - "main"
+    pull_request:
+        branches: [main]
+        paths:
+            - .github/workflows/Node.Build.Validate.yaml
+            - "src/**"
+            - "package.json"
+            - "package-lock.json"
+            - "tsconfig.json"
+            - ".npmrc"
+            - ".nvmrc"
+            - ".eslintrc.json"
+            - "prettier.config.mjs"
+            - ".prettierignore"
+            - "postcss.config.mjs"
+            - "tailwind.config.ts"
+            - "next.config.mjs"
+jobs:
+    node-build:
+        name: Node.Build
+        uses: next-boilerplate-251001/main/.github/workflows/Node.Build.Publish.yaml@v1
+        with:
+            node_version: 20
+            project_root_directory: "."
+            npmscripts: lint,typecheck,format:check
+            run_sonar_scan: true
+        secrets:
+            sonar_token: ${{ secrets.SONAR_TOKEN }}
+    build-docker:
+        name: Docker.Build
+        uses: next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@v1
+        with:
+            dockerfile_path: ./Dockerfile
+            image_name: next-boilerplate-251001
+            image_tag: V0.1.0
+            run_docker_publish: true
+            image_subdirectory: internal/frontend
+        secrets:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)

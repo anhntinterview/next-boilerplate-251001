@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 <<<<<<< HEAD
+<<<<<<< HEAD
 .pnp.js
 .yarn/install-state.gz
 =======
@@ -14,6 +15,10 @@
 !.yarn/releases
 !.yarn/versions
 >>>>>>> 32d98d4 (Initial commit from Create Next App)
+=======
+.pnp.js
+.yarn/install-state.gz
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
 
 # testing
 /coverage
@@ -34,6 +39,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # local env files
 .env*.local
@@ -44,6 +50,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 >>>>>>> 32d98d4 (Initial commit from Create Next App)
+=======
+
+# local env files
+.env*.local
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
 
 # vercel
 .vercel
@@ -52,6 +63,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
 src/messages/*.d.json.ts
 
 storybook-static
@@ -66,6 +80,10 @@ node_modules/
 playwright/.auth
 
 # vscode
+<<<<<<< HEAD
 .vscode/launch.json
 =======
 >>>>>>> 32d98d4 (Initial commit from Create Next App)
+=======
+.vscode/launch.json
+>>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
