@@ -28,6 +28,14 @@ jobs:
           node-version: 20
           cache: "npm"
 
+      # Export Playwright environment variables
+      - name: Set Playwright env
+        run: |
+          echo "PLAYWRIGHT_TIMEOUT=60000" >> $GITHUB_ENV
+          echo "PLAYWRIGHT_EXPECT_TIMEOUT=5000" >> $GITHUB_ENV
+          echo "CI=true" >> "$GITHUB_ENV"
+          echo "PLAYWRIGHT_LOGGING_LEVEL=1" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm ci
 
