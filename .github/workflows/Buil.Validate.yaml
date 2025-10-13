@@ -1,0 +1,35 @@
+name: Build.Validate
+
+on:
+    workflow_dispatch:
+    pull_request:
+        branches: [main]
+    push:
+        branches: [main]
+
+jobs:
+    # 1. Lint GitHub Actions / YAML
+    lint-actions:
+        name: Validate.Lint.Actions
+        uses: next-boilerplate-251001/main/.github/workflows/_Validate.Lint.Actions.yaml@v1
+
+    # 2. Validate PR Title (Conventional Commit)
+    lint-pr:
+        name: Validate.Lint.PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: next-boilerplate-251001/main/.github/workflows/_Validate.Lint.PR.yaml@v1
+
+    # 3. Node Build + Sonar Scan + Docker Build Validation
+    node-build:
+        name: Node.Build.Validate
+        needs: [lint-actions, lint-pr]
+        uses: next-boilerplate-251001/main/.github/workflows/Node.Build.Validate.yaml@v1
+        secrets:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # 4. Playwright Tests (E2E)
+    playwright:
+        name: Playwright.E2E
+        needs: [node-build]
+        uses: next-boilerplate-251001/main/.github/workflows/playwright.yaml@v1

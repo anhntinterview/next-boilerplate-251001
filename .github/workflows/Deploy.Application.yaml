@@ -1,0 +1,45 @@
+name: Deploy.Application
+
+on:
+    repository_dispatch:
+        types: [artifacts-published]
+
+jobs:
+    deploy:
+        name: Deploy to Server
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup SSH
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+            - name: Pull latest Docker image
+              run: |
+                  echo "🔄 Pulling Docker image for version: ${{ github.event.client_payload.ref }}"
+                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+                    docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
+                  "
+
+            - name: Deploy container
+              run: |
+                  echo "🚀 Deploying version: ${{ github.event.client_payload.ref }}"
+                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+                    docker stop next-boilerplate-frontend || true
+                    docker rm next-boilerplate-frontend || true
+                    docker run -d \
+                      --name next-boilerplate-frontend \
+                      -p 3000:3000 \
+                      ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
+                  "
+
+            - name: Verify deployment
+              run: |
+                  echo "✅ Verifying deployment..."
+                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "docker ps | grep next-boilerplate-frontend"
