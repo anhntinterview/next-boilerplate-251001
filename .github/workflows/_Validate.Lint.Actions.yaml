@@ -48,8 +48,7 @@ jobs:
                   -ignore 'SC2129' \
                   -ignore 'SC2005' \
                   -ignore 'SC2046' \
-                  -ignore 'SC2155' \
-                  .github/workflows
+                  -ignore 'SC2155'
             - name: Generate output
               if: ${{success()}}
               run: |
