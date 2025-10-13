@@ -83,7 +83,7 @@ jobs:
                 required: false
                 default: "."
                 type: string
-            run_docker-publish:
+            run_docker_publish:
                 required: false
                 default: true
                 type: boolean

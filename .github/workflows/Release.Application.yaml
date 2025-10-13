@@ -169,7 +169,7 @@ jobs:
               id: versions
               run: |
                   if [ "${{github.event_name}}" == "workflow_dispatch" ]; then
-                      echo "docker_tag=${{inputs.manual_docker_tag}}" >> $GITHUB_OUTPUT
+                      echo "docker_tag=${{inputs.manual_docker_tag}}" >> "$GITHUB_OUTPUT"
                   else
                       echo "docker_tag=$(jq -r '."."' .release-please-manifest.json)" >> "$GITHUB_OUTPUT"
                   fi

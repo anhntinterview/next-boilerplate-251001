@@ -84,6 +84,7 @@ jobs:
         uses: next-boilerplate-251001/main/.github/workflows/Node.Build.Validate.yaml@v1
         secrets:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # 4. Playwright Tests (E2E)

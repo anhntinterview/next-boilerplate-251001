@@ -114,9 +114,11 @@ jobs:
                 default: false
                 type: boolean
         secrets:
-            sonar_token:
+            SONAR_TOKEN:
                 required: false
-            github_token:
+            GITHUB_TOKEN:
+                required: false
+            SONAR_HOST_URL:
                 required: false
 jobs:
     node_build:
