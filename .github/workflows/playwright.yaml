@@ -100,6 +100,7 @@ jobs:
       PLAYWRIGHT_EXPECT_TIMEOUT: 5000
       CI: true
       PLAYWRIGHT_LOGGING_LEVEL: 1
+      SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
