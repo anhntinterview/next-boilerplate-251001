@@ -103,11 +103,12 @@ jobs:
               if: ${{ always() }}
               id: lint
               run: |
-                  ${{steps.get_actionlint.output.executable}} -color \
+                  "${{ steps.get_actionlint.outputs.executable }}" -color \
                   -ignore 'SC2129' \
                   -ignore 'SC2005' \
                   -ignore 'SC2046' \
-                  -ignore 'SC2155'
+                  -ignore 'SC2155' \
+                  .github/workflows
             - name: Generate output
               if: ${{success()}}
               run: |

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 yaml-files:
   - "*.yaml"
@@ -35,3 +36,15 @@ rules:
   truthy:
     level: warning
     check-keys: false
+=======
+extends: default
+
+rules:
+  line-length:
+    max: 140
+    level: warning
+  truthy:
+    allowed-values: ["true", "false", "yes", "no", "on", "off"]
+  document-start:
+    present: false
+>>>>>>> 446d5aa (fix(ci): fix command actionlint, playwright wrong runs-on spelling word & yamllint config)
