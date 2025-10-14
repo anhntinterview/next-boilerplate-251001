@@ -61,7 +61,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm start",
+    command: "npm start:playwright",
     port: 3001,
     reuseExistingServer: false, // don’t restart for local runs,
     timeout: 120000, // Increase webServer timeout
