@@ -15,7 +15,11 @@
     "build:playwright:dev": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true npx next build",
     "postbuild": "node scripts/build.js",
     "start": "npx next start",
+<<<<<<< HEAD
     "start:playwright": "PORT=3001 node .next/standalone/server.js",
+=======
+    "start:playwright": "npx next start --port 3001",
+>>>>>>> e28ece6 (fix(ci): update command using next start while run npm start for playwright)
     "start:production": "NODE_ENV=production node build/server.js",
     "lint": "eslint .",
     "typecheck": "tsc -b",
