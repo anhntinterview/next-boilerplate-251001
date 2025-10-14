@@ -115,7 +115,7 @@ jobs:
         run: npm ci
 
       - name: Install Chromium Browser
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install chromium
 
       - name: Build the app for Playwright
         run: npm run build:playwright
