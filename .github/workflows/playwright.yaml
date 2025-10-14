@@ -17,12 +17,13 @@ jobs:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     env: # Set environment variables
       PLAYWRIGHT_TIMEOUT: 60000
       PLAYWRIGHT_EXPECT_TIMEOUT: 5000
       CI: true
       PLAYWRIGHT_LOGGING_LEVEL: 1
+      BASE_URL: http://localhost:3001
       SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
     steps:
       - name: Checkout repository
