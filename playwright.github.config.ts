@@ -54,7 +54,7 @@ export default defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         // Use prepared browser state.
-        storageState: "tests/browser-state.json",
+        // storageState: "tests/browser-state.json",
       },
       dependencies: ["setup"],
     },
