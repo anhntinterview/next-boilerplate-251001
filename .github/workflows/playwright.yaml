@@ -121,6 +121,10 @@ jobs:
         run: npm run build:playwright
 
       - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
+        env:
+          PORT: 3001
+          BASE_URL: http://localhost:3001
+          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
         run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
 
 <<<<<<< HEAD

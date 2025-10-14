@@ -61,9 +61,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm start -- --port 3001",
+    command: "npm start",
     port: 3001,
-    reuseExistingServer: process.env.CI ? false : true, // don’t restart for local runs,
+    reuseExistingServer: false, // don’t restart for local runs,
     timeout: 120000, // Increase webServer timeout
     stdout: process.env.PLAYWRIGHT_LOGGING_LEVEL === "2" ? "pipe" : "ignore",
     stderr: process.env.PLAYWRIGHT_LOGGING_LEVEL === "3" ? "pipe" : "ignore",
