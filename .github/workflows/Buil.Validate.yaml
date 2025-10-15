@@ -82,6 +82,7 @@ jobs:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b3525a3 (fix: revert)
 
@@ -119,3 +120,10 @@ jobs:
 >>>>>>> b3525a3 (fix: revert)
 =======
 >>>>>>> c8ae621 (fix: remove lint & playwright to Build.Validate.yaml)
+=======
+        with:
+            node_version: 20
+            project_root_directory: "."
+            npmscripts: lint,typecheck,format:check
+            run_sonar_scan: true
+>>>>>>> c8f0a15 (fix(ci): update inputs)
