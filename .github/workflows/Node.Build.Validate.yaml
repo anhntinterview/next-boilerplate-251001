@@ -106,7 +106,6 @@ jobs:
         secrets:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     build-docker:
         name: Docker.Build
         needs: [node-build]
@@ -117,6 +116,7 @@ jobs:
             image_tag: V0.1.0
             run_docker_publish: true
             image_subdirectory: internal/frontend
+<<<<<<< HEAD
         secrets:
 <<<<<<< HEAD
             github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -124,3 +124,5 @@ jobs:
 =======
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 >>>>>>> 7d6414b (fix(ci): wrong secrets word)
+=======
+>>>>>>> a469fdf (fix(ci): remove GITHUB_TOKEN input)
