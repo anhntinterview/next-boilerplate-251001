@@ -1,11 +1,14 @@
 name: Playwirght E2E
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
-  push:
-    branches:
-      - "main"
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tests:
