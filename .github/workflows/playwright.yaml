@@ -3,8 +3,20 @@ name: Playwirght E2E
 on:
   push:
     branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
   pull_request:
     branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
 
 concurrency:
   group: playwright-${{ github.ref }}
@@ -32,6 +44,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+        # ✅ Cache npm + Playwright binaries to speed up install
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,6 +71,13 @@ jobs:
 
       - name: Install Chromium Browser
         run: npx playwright install chromium
+
+      # ✅ Download pre-built app artifact if it exists (to skip rebuild)
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+        continue-on-error: true
 
       - name: Build the app for Playwright
         run: npm run build:playwright
