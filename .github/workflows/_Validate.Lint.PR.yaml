@@ -94,7 +94,7 @@ jobs:
           ALLOWED_TYPES="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|deps"
 
           #Regex for Conventional Commit style: type(optional-scope): message
-          REGEX="^(${ALLOWED_TYPES})(\[[a-zA-Z0-9_-]+\])?: .+"
+          REGEX="^(${ALLOWED_TYPES})(\([a-zA-Z0-9_-]+\))?: .+"
 
           if [[ "$TITLE" =~ $REGEX ]]; then
             echo "✅ PR title format is valid."
