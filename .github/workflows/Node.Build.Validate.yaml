@@ -88,9 +88,12 @@ jobs:
                 required: false
             SONAR_HOST_URL:
                 required: false
+<<<<<<< HEAD
             GITHUB_TOKEN:
                 required: true
 >>>>>>> 586bd6d (fix(ci): change workflow_dispatch to workflow_call in Node.Build.Validate.yaml & optimize code Node.Build.Publish.yaml + Docker.Build.Publish.yaml)
+=======
+>>>>>>> 39d0073 (fĩ(ci build): remove GITHUB_TOKEN)
 jobs:
     node-build:
         name: Node.Build
