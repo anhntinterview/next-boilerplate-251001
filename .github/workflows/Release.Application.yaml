@@ -185,8 +185,6 @@ jobs:
             image_tag: V0.1.0
             run_docker_publish: true
             image_subdirectory: internal/frontend
-        secrets:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
 
     create-github-tags:
         name: Create.GitHub.Tags
@@ -199,8 +197,6 @@ jobs:
             major: ${{ needs.release.outputs.major }}
             minor: ${{ needs.release.outputs.minor }}
             patch: ${{ needs.release.outputs.patch }}
-        secrets:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
 
     trigger-deployment:
         name: Trigger.Deployment
