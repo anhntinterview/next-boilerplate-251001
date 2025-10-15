@@ -101,7 +101,6 @@ jobs:
       - "playwright.config.*"
       - "package-lock.json"
       - "package.json"
-  workflow_call:
 
 concurrency:
   group: playwright-${{ github.ref }}

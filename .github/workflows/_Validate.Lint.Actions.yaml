@@ -5,6 +5,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
   pull_request:
     branches:
@@ -72,6 +73,9 @@ jobs:
 =======
     workflow_call:
 >>>>>>> acc18b1 (fix(ci): workflow_call to sub yaml file)
+=======
+    workflow_dispatch:
+>>>>>>> c21f672 (fix: revert)
     pull_request:
         branches:
             - "main"
