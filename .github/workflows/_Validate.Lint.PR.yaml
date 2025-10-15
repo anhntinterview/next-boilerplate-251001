@@ -5,6 +5,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 =======
 >>>>>>> 46d1b4c (fix(ci): actionlint)
@@ -13,6 +14,9 @@ on:
 >>>>>>> acc18b1 (fix(ci): workflow_call to sub yaml file)
 =======
 >>>>>>> c21f672 (fix: revert)
+=======
+  workflow_dispatch:
+>>>>>>> 40db188 (fix: update)
   pull_request:
     types:
       - opened

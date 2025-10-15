@@ -4,6 +4,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 concurrency:
   group: playwright-${{ github.ref }}
@@ -85,6 +86,9 @@ jobs:
       - "main"
 >>>>>>> 446d5aa (fix(ci): fix command actionlint, playwright wrong runs-on spelling word & yamllint config)
 =======
+=======
+  workflow_dispatch:
+>>>>>>> 40db188 (fix: update)
   push:
     branches: [main]
     paths:
