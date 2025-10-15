@@ -31,7 +31,6 @@ jobs:
         secrets:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     build-docker:
         name: Docker.Build
         needs: [node-build]
@@ -42,5 +41,3 @@ jobs:
             image_tag: V0.1.0
             run_docker_publish: true
             image_subdirectory: internal/frontend
-        secrets:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
