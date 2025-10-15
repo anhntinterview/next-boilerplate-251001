@@ -80,7 +80,6 @@ jobs:
 
             - name: Create and push version tags
               env:
-                  GITHUB_TOKEN: ${{ secrets.github_token }}
                   MAJOR: ${{ inputs.major }}
                   MINOR: ${{ inputs.minor }}
                   PATCH: ${{ inputs.patch }}
