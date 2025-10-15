@@ -3,6 +3,7 @@ name: Playwirght E2E
 on:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 concurrency:
   group: playwright-${{ github.ref }}
@@ -83,6 +84,16 @@ jobs:
     branches:
       - "main"
 >>>>>>> 446d5aa (fix(ci): fix command actionlint, playwright wrong runs-on spelling word & yamllint config)
+=======
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+>>>>>>> ab6b35d (fix(ci): cancel previous commit to focus on current commit is run)
 
 jobs:
   tests:

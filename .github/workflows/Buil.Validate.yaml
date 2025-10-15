@@ -2,6 +2,7 @@ name: Build.Validate
 
 on:
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_dispatch:
   push:
     branches: [main]
@@ -62,8 +63,16 @@ jobs:
     workflow_dispatch:
     pull_request:
         branches: [main]
+=======
+>>>>>>> ab6b35d (fix(ci): cancel previous commit to focus on current commit is run)
     push:
         branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
     # 1. Lint GitHub Actions / YAML
