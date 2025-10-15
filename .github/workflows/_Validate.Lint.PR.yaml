@@ -1,6 +1,7 @@
 name: _Validate.Lint.PR
 
 on:
+  workflow_call:
   pull_request:
     types:
       - opened
