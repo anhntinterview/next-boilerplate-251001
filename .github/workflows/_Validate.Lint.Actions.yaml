@@ -2,6 +2,7 @@ name: _Validate.Lint.Actions
 
 on:
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
   pull_request:
     branches:
@@ -61,7 +62,13 @@ jobs:
           echo "Workflow validation failure!!!"  >> "$GITHUB_STEP_SUMMARY"
 =======
     workflow_dispatch:
+=======
+>>>>>>> ea075af (fix(ci): remove check lint + playwright to Build.Validate.yaml)
     pull_request:
+        types:
+            - opened
+            - edited
+            - reopened
         branches:
             - "main"
         paths:
