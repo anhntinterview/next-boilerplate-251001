@@ -3,9 +3,13 @@ name: _Validate.Lint.PR
 on:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 =======
 >>>>>>> 46d1b4c (fix(ci): actionlint)
+=======
+  workflow_call:
+>>>>>>> acc18b1 (fix(ci): workflow_call to sub yaml file)
   pull_request:
     types:
       - opened
