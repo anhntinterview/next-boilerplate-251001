@@ -97,7 +97,7 @@ jobs:
 jobs:
     node-build:
         name: Node.Build
-        uses: next-boilerplate-251001/.github/workflows/Node.Build.Publish.yaml@v1
+        uses: next-boilerplate-251001/main/.github/workflows/Node.Build.Publish.yaml@v1
         with:
             node_version: 20
             project_root_directory: "."
@@ -110,7 +110,7 @@ jobs:
     build-docker:
         name: Docker.Build
         needs: [node-build]
-        uses: next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@v1
+        uses: next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@v1
         with:
             dockerfile_path: ./Dockerfile
             image_name: next-boilerplate-251001
