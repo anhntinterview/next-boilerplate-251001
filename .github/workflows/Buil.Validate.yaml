@@ -78,24 +78,25 @@ jobs:
     # 1. Lint GitHub Actions / YAML
     lint-actions:
         name: Validate.Lint.Actions
-        uses: next-boilerplate-251001/main/.github/workflows/_Validate.Lint.Actions.yaml@v1
+        uses: next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
 
     # 2. Validate PR Title (Conventional Commit)
     lint-pr:
         name: Validate.Lint.PR
         if: ${{ github.event_name == 'pull_request' }}
-        uses: next-boilerplate-251001/main/.github/workflows/_Validate.Lint.PR.yaml@v1
+        uses: next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
 
     # 3. Node Build + Sonar Scan + Docker Build Validation
     node-build:
         name: Node.Build.Validate
         needs: [lint-actions, lint-pr]
-        uses: next-boilerplate-251001/main/.github/workflows/Node.Build.Validate.yaml@v1
+        uses: next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
 
     # 4. Playwright Tests (E2E)
     playwright:
         name: Playwright.E2E
         needs: [node-build]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         uses: next-boilerplate-251001/main/.github/workflows/playwright.yaml@v1
@@ -106,3 +107,6 @@ jobs:
 =======
         uses: next-boilerplate-251001/main/.github/workflows/playwright.yaml@v1
 >>>>>>> 614b1ba (fix(ci build): fix format 'owner/repository/' or './' for local workflows)
+=======
+        uses: next-boilerplate-251001/.github/workflows/playwright.yaml@v1
+>>>>>>> 5a30a79 (fix(ci): fix access file path)
