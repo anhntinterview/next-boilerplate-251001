@@ -12,9 +12,6 @@ on:
             patch:
                 required: true
                 type: string
-        secrets:
-            github_token:
-                required: true
 
 jobs:
     create-tags:
