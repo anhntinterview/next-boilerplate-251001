@@ -19,8 +19,6 @@ on:
                 required: false
             SONAR_HOST_URL:
                 required: false
-            GITHUB_TOKEN:
-                required: true
 jobs:
     node-build:
         name: Node.Build

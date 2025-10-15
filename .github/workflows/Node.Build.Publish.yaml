@@ -26,8 +26,6 @@ on:
         secrets:
             SONAR_TOKEN:
                 required: false
-            GITHUB_TOKEN:
-                required: false
             SONAR_HOST_URL:
                 required: false
 jobs:
@@ -78,6 +76,6 @@ jobs:
             - name: Publish to Github Packages
               if: ${{inputs.publish_to_github_packages == true}}
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.github_token || secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: npm publish
               working-directory: ${{inputs.project_root_directory}}
