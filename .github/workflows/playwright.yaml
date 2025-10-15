@@ -1,0 +1,61 @@
+name: Playwirght E2E
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        browser: [chromium]
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    timeout-minutes: 60
+    runs-on: [self-hosted, Linux, X64]
+    env: # Set environment variables
+      PLAYWRIGHT_TIMEOUT: 60000
+      PLAYWRIGHT_EXPECT_TIMEOUT: 5000
+      CI: true
+      PLAYWRIGHT_LOGGING_LEVEL: 1
+      BASE_URL: http://localhost:3001
+      SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium Browser
+        run: npx playwright install chromium
+
+      - name: Build the app for Playwright
+        run: npm run build:playwright
+
+      - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
+        env:
+          PORT: 3001
+          BASE_URL: http://localhost:3001
+          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+        run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
+
+      - name: Upload Playwright artifacts (Shard ${{ matrix.shardIndex }})
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts-shard-${{ matrix.shardIndex }}-run-${{ github.run_attempt }}
+          path: test-results/

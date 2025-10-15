@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
 test("renders home with gretting", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:3001");
   await expect(page.locator("p")).toContainText("Hello, Developer");
 });
