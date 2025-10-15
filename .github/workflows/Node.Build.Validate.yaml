@@ -1,6 +1,7 @@
 name: Node.Build.Validate
 on:
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
     inputs:
       node_version:
@@ -67,6 +68,29 @@ jobs:
             - "postcss.config.mjs"
             - "tailwind.config.ts"
             - "next.config.mjs"
+=======
+    workflow_call:
+        inputs:
+            node_version:
+                required: true
+                type: string
+            project_root_directory:
+                required: true
+                type: string
+            npmscripts:
+                required: true
+                type: string
+            run_sonar_scan:
+                required: true
+                type: boolean
+        secrets:
+            SONAR_TOKEN:
+                required: false
+            SONAR_HOST_URL:
+                required: false
+            GITHUB_TOKEN:
+                required: true
+>>>>>>> 586bd6d (fix(ci): change workflow_dispatch to workflow_call in Node.Build.Validate.yaml & optimize code Node.Build.Publish.yaml + Docker.Build.Publish.yaml)
 jobs:
     node-build:
         name: Node.Build

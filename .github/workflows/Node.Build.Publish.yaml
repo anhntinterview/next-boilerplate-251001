@@ -135,16 +135,16 @@ jobs:
                   cache: "npm"
 
             - name: Run npm script
+              shell: bash
               run: |
-                  IFS=',' read -ra scripts <<< "${{inputs.npmscripts}}"
-                  for script in "${scripts[@]}"; do
+                  for script in "${{ inputs.npmscripts }}" | tr ',' ' '; do
                     echo "🟢 Running npm run $script"
                     npm run "$script"
                   done
               working-directory: ${{inputs.project_root_directory}}
 
             - name: Build project
-              run: npm run build
+              run: npm run build:ci
               working-directory: ${{inputs.project_root_directory}}
 
             - name: Upload build artifact
@@ -152,7 +152,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: build-output
-                  path: ${{inputs.project_root_directory}}/build/
+                  path: ${{inputs.project_root_directory}}/**/build
 
             - name: SonarQube Scan
               if: ${{inputs.run_sonar_scan == true}}
