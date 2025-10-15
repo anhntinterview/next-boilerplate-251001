@@ -15,3 +15,8 @@ jobs:
     node-build:
         name: Node.Build.Validate
         uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
+        with:
+            node_version: 20
+            project_root_directory: "."
+            npmscripts: lint,typecheck,format:check
+            run_sonar_scan: true
