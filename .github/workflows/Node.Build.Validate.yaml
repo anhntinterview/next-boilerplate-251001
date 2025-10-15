@@ -106,6 +106,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     build-docker:
         name: Docker.Build
+        needs: [node-build]
         uses: next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@v1
         with:
             dockerfile_path: ./Dockerfile
@@ -114,5 +115,9 @@ jobs:
             run_docker_publish: true
             image_subdirectory: internal/frontend
         secrets:
+<<<<<<< HEAD
             github_token: ${{ secrets.GITHUB_TOKEN }}
 >>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
+=======
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+>>>>>>> 7d6414b (fix(ci): wrong secrets word)
