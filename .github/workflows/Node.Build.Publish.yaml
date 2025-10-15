@@ -137,7 +137,7 @@ jobs:
             - name: Run npm script
               shell: bash
               run: |
-                  for script in "${{ inputs.npmscripts }}" | tr ',' ' '; do
+                  for script in "${{ inputs.npmscripts }}" | tr ',' '\n'; | while read -r script; do
                     echo "🟢 Running npm run $script"
                     npm run "$script"
                   done
