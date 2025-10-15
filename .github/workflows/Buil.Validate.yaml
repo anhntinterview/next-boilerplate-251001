@@ -75,16 +75,32 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    # Node Build + Sonar Scan + Docker Build Validation
+    # 1. Lint GitHub Actions / YAML
+    lint-actions:
+        name: Validate.Lint.Actions
+        uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
+
+    # 2. Validate PR Title (Conventional Commit)
+    lint-pr:
+        name: Validate.Lint.PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
+
+    # 3. Node Build + Sonar Scan + Docker Build Validation
     node-build:
         name: Node.Build.Validate
+        needs: [lint-actions, lint-pr]
         uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b3525a3 (fix: revert)
 
     # 4. Playwright Tests (E2E)
     playwright:
         name: Playwright.E2E
         needs: [node-build]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -109,3 +125,6 @@ jobs:
 >>>>>>> 9e4f382 (fix(ci): yaml file)
 =======
 >>>>>>> ea075af (fix(ci): remove check lint + playwright to Build.Validate.yaml)
+=======
+        uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
+>>>>>>> b3525a3 (fix: revert)

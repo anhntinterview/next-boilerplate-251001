@@ -3,6 +3,7 @@ name: _Validate.Lint.Actions
 on:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
   pull_request:
     branches:
@@ -64,11 +65,10 @@ jobs:
     workflow_dispatch:
 =======
 >>>>>>> ea075af (fix(ci): remove check lint + playwright to Build.Validate.yaml)
+=======
+    workflow_dispatch:
+>>>>>>> b3525a3 (fix: revert)
     pull_request:
-        types:
-            - opened
-            - edited
-            - reopened
         branches:
             - "main"
         paths:
