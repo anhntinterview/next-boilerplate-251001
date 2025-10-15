@@ -19,6 +19,10 @@ on:
                 required: false
             SONAR_HOST_URL:
                 required: false
+permissions:
+    contents: read
+    packages: write
+    id-token: write
 jobs:
     node-build:
         name: Node.Build
