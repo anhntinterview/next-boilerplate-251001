@@ -36,6 +36,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     build-docker:
         name: Docker.Build
+        needs: [node-build]
         uses: next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@v1
         with:
             dockerfile_path: ./Dockerfile
@@ -44,4 +45,4 @@ jobs:
             run_docker_publish: true
             image_subdirectory: internal/frontend
         secrets:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
