@@ -4,6 +4,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_dispatch:
   push:
     branches: [main]
@@ -73,27 +74,35 @@ jobs:
         branches: [main]
     pull_request:
         branches: [main]
+=======
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+>>>>>>> d5ed159 (fix(format): prettier)
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
-    contents: read
-    packages: write
-    id-token: write
+  contents: read
+  packages: write
+  id-token: write
 
 jobs:
-    # 1. Lint GitHub Actions / YAML
-    lint-actions:
-        name: Validate.Lint.Actions
-        uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
+  # 1. Lint GitHub Actions / YAML
+  lint-actions:
+    name: Validate.Lint.Actions
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
 
-    # 2. Validate PR Title (Conventional Commit)
-    lint-pr:
-        name: Validate.Lint.PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
+  # 2. Validate PR Title (Conventional Commit)
+  lint-pr:
+    name: Validate.Lint.PR
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
 
+<<<<<<< HEAD
     # 3. Node Build + Sonar Scan + Docker Build Validation
     node-build:
         name: Node.Build.Validate
@@ -156,3 +165,23 @@ jobs:
         needs: [node-build]
         uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
 >>>>>>> aed7696 (fix(ci): migrate lint & playwright to Build.Validate.yaml)
+=======
+  # 3. Node Build + Sonar Scan + Docker Build Validation
+  node-build:
+    name: Node.Build.Validate
+    needs: [lint-actions, lint-pr]
+    if: ${{ success() }}
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
+    with:
+      node_version: 20
+      project_root_directory: "."
+      npmscripts: lint,typecheck,format:check
+      run_sonar_scan: true
+
+  # 4. Playwright Tests (E2E)
+  playwright:
+    name: Playwright.E2E
+    needs: [node-build]
+    if: ${{ success() }}
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
+>>>>>>> d5ed159 (fix(format): prettier)

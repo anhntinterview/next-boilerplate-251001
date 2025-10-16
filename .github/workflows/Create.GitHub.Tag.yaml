@@ -2,6 +2,9 @@ name: Create.GitHub.Tag
 
 on:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5ed159 (fix(format): prettier)
   workflow_call:
     inputs:
       major:
@@ -13,6 +16,7 @@ on:
       patch:
         required: true
         type: string
+<<<<<<< HEAD
 
 jobs:
   create-tags:
@@ -68,47 +72,56 @@ jobs:
             patch:
                 required: true
                 type: string
+=======
+>>>>>>> d5ed159 (fix(format): prettier)
 
 jobs:
-    create-tags:
-        name: Create.GitHub.Tags
-        runs-on: ubuntu-latest
+  create-tags:
+    name: Create.GitHub.Tags
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Create and push version tags
-              env:
-                  MAJOR: ${{ inputs.major }}
-                  MINOR: ${{ inputs.minor }}
-                  PATCH: ${{ inputs.patch }}
-              run: |
-                  set -e
-                  VERSION="v${MAJOR}.${MINOR}.${PATCH}"
-                  echo "🏷️ Creating tags for ${VERSION}"
+      - name: Create and push version tags
+        env:
+          MAJOR: ${{ inputs.major }}
+          MINOR: ${{ inputs.minor }}
+          PATCH: ${{ inputs.patch }}
+        run: |
+          set -e
+          VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "🏷️ Creating tags for ${VERSION}"
 
-                  # Configure Git user
-                  git config user.name "github-actions[bot]"
-                  git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Configure Git user
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-                  # Fetch latest tags to avoid conflicts
-                  git fetch --tags
+          # Fetch latest tags to avoid conflicts
+          git fetch --tags
 
-                  # Create or update patch tag (v1.2.3)
-                  git tag -f "${VERSION}"
-                  git push origin "${VERSION}" --force
+          # Create or update patch tag (v1.2.3)
+          git tag -f "${VERSION}"
+          git push origin "${VERSION}" --force
 
-                  # Create or update minor tag (v1.2)
-                  git tag -f "v${MAJOR}.${MINOR}"
-                  git push origin "v${MAJOR}.${MINOR}" --force
+          # Create or update minor tag (v1.2)
+          git tag -f "v${MAJOR}.${MINOR}"
+          git push origin "v${MAJOR}.${MINOR}" --force
 
-                  # Create or update major tag (v1)
-                  git tag -f "v${MAJOR}"
-                  git push origin "v${MAJOR}" --force
+          # Create or update major tag (v1)
+          git tag -f "v${MAJOR}"
+          git push origin "v${MAJOR}" --force
 
+<<<<<<< HEAD
                   echo "✅ Tags created:"
                   echo "  - ${VERSION}"
                   echo "  - v${MAJOR}.${MINOR}"
                   echo "  - v${MAJOR}"
 >>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
+=======
+          echo "✅ Tags created:"
+          echo "  - ${VERSION}"
+          echo "  - v${MAJOR}.${MINOR}"
+          echo "  - v${MAJOR}"
+>>>>>>> d5ed159 (fix(format): prettier)

@@ -2,6 +2,9 @@ name: Node.Build.Validate
 on:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5ed159 (fix(format): prettier)
   workflow_call:
     inputs:
       node_version:
@@ -21,6 +24,7 @@ on:
         required: false
       SONAR_HOST_URL:
         required: false
+<<<<<<< HEAD
 permissions:
   contents: read
   packages: write
@@ -133,3 +137,31 @@ jobs:
 >>>>>>> 7d6414b (fix(ci): wrong secrets word)
 =======
 >>>>>>> a469fdf (fix(ci): remove GITHUB_TOKEN input)
+=======
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+jobs:
+  node-build:
+    name: Node.Build
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Publish.yaml@v1
+    with:
+      node_version: 20
+      project_root_directory: "."
+      npmscripts: lint,typecheck,format:check
+      run_sonar_scan: true
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  build-docker:
+    name: Docker.Build
+    needs: [node-build]
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@v1
+    with:
+      dockerfile_path: ./Dockerfile
+      image_name: next-boilerplate-251001
+      image_tag: V0.1.0
+      run_docker_publish: true
+      image_subdirectory: internal/frontend
+>>>>>>> d5ed159 (fix(format): prettier)

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5ed159 (fix(format): prettier)
 import type NodeCache from "node-cache";
 import type messages from "./src/messages/en.json";
 import type { ErrorPayload } from "./src/services/error-handling";
@@ -20,6 +23,7 @@ declare global {
   // eslint-disable-next-line no-var
   var tokenCache: NodeCache;
 }
+<<<<<<< HEAD
 =======
 import type NodeCache from "node-cache";
 import type messages from "./src/messages/en.json";
@@ -43,3 +47,5 @@ declare global {
   var tokenCache: NodeCache;
 }
 >>>>>>> 0156483 (initial commit)
+=======
+>>>>>>> d5ed159 (fix(format): prettier)
