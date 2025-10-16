@@ -3,6 +3,7 @@ name: Build.Validate
 on:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_dispatch:
   push:
     branches: [main]
@@ -65,11 +66,13 @@ jobs:
         branches: [main]
 =======
 >>>>>>> ab6b35d (fix(ci): cancel previous commit to focus on current commit is run)
+=======
+    workflow_dispatch:
+>>>>>>> b18b27d (fix(ci): update)
     push:
         branches: [main]
     pull_request:
         branches: [main]
-    workflow_dispatch:
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
