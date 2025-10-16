@@ -2,23 +2,6 @@ name: Playwirght E2E
 
 on:
   workflow_call:
-  push:
-    branches: [main]
-    paths:
-      - "src/**"
-      - "tests/**"
-      - "playwright.config.*"
-      - "package-lock.json"
-      - "package.json"
-  pull_request:
-    branches: [main]
-    paths:
-      - "src/**"
-      - "tests/**"
-      - "playwright.config.*"
-      - "package-lock.json"
-      - "package.json"
-
 concurrency:
   group: playwright-${{ github.ref }}
   cancel-in-progress: true

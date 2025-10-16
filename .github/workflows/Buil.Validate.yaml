@@ -4,8 +4,20 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
   pull_request:
     branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
