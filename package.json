@@ -16,7 +16,7 @@
     "start": "npx next start",
     "start:playwright": "node .next/standalone/server.js",
     "start:production": "NODE_ENV=production node build/server.js",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc -b",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
