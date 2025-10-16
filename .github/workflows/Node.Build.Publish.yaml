@@ -45,14 +45,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
