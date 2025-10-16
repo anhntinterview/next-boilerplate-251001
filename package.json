@@ -18,6 +18,8 @@
     "start:production": "NODE_ENV=production node build/server.js",
     "lint": "next lint",
     "typecheck": "tsc -b",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
     "test": "cross-env TZ=UTC vitest",
     "test:coverage": "cross-env TZ=UTC vitest --coverage",
     "test:playwright": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true TZ=UTC npx playwright test -c ./playwright.github.config.ts",

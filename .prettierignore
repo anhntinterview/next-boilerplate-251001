@@ -1,0 +1,9 @@
+CHANGELOG.md
+.release-please-manifest.json
+src/mocks/*.json
+tests/browser-state.json
+src/services/graphql/
+src/services/**/*-api.d.ts
+**/openapi.json
+src/services/extras/api-spec.yaml
+src/services/unified-communications/unified-communications-platform-design-2.5.1-2.5.1.json
