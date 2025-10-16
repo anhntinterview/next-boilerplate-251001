@@ -1,7 +1,10 @@
 {
-  "name": "next-boilerplate-251001",
+  "name": "@anhntinterview/next-boilerplate-251001",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
