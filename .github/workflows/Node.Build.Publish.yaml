@@ -78,9 +78,6 @@ jobs:
       - name: SonarQube Scan
         if: ${{inputs.run_sonar_scan == true}}
         uses: SonarSource/sonarqube-scan-action@v6
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           projectBaseDir: ${{inputs.project_root_directory}}
 
