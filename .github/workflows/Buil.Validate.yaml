@@ -170,7 +170,11 @@ jobs:
   node-build:
     name: Node.Build.Validate
     needs: [lint-actions, lint-pr]
-    if: success()
+    if: >
+      ${{
+        (github.event_name != 'pull_request' || needs.lint-pr.result == 'success') &&
+        needs.lint-actions.result == 'success'
+      }}
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
     with:
       node_version: 20
@@ -182,6 +186,6 @@ jobs:
   playwright:
     name: Playwright.E2E
     needs: [node-build]
-    if: success()
+    if: ${{needs.node-build.result == 'success'}}
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
 >>>>>>> d5ed159 (fix(format): prettier)
