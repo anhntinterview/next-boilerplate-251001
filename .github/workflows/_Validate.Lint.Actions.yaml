@@ -50,7 +50,7 @@ jobs:
           -ignore 'SC2046' \
           -ignore 'SC2155'
       - name: Generate output
-        if: ${{success()}}
+        if: success()
         run: |
           echo "Workflow validation was successful!"  >>  "$GITHUB_STEP_SUMMARY"
 
