@@ -5,6 +5,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 concurrency:
   group: playwright-${{ github.ref }}
@@ -89,6 +90,9 @@ jobs:
 =======
   workflow_dispatch:
 >>>>>>> 40db188 (fix: update)
+=======
+  workflow_call:
+>>>>>>> 49ff293 (fix(ci): update workflow_call)
   push:
     branches: [main]
     paths:

@@ -6,6 +6,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
 =======
 >>>>>>> 46d1b4c (fix(ci): actionlint)
@@ -17,6 +18,9 @@ on:
 =======
   workflow_dispatch:
 >>>>>>> 40db188 (fix: update)
+=======
+  workflow_call:
+>>>>>>> 49ff293 (fix(ci): update workflow_call)
   pull_request:
     types:
       - opened

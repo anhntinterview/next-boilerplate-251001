@@ -6,6 +6,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   workflow_call:
   pull_request:
     branches:
@@ -76,6 +77,9 @@ jobs:
 =======
     workflow_dispatch:
 >>>>>>> c21f672 (fix: revert)
+=======
+    workflow_call:
+>>>>>>> 49ff293 (fix(ci): update workflow_call)
     pull_request:
         branches:
             - "main"
