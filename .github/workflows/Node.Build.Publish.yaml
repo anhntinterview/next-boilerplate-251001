@@ -156,7 +156,7 @@ jobs:
 
             - name: SonarQube Scan
               if: ${{inputs.run_sonar_scan == true}}
-              uses: SonarSource/sonarqube-scan-action@v2
+              uses: SonarSource/sonarqube-scan-action@v6
               env:
                   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
                   SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
@@ -167,6 +167,8 @@ jobs:
               if: ${{inputs.publish_to_github_packages == true}}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npm publish
+              run: |
+                  echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc 
+                  npm publish
               working-directory: ${{inputs.project_root_directory}}
 >>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
