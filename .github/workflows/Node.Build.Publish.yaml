@@ -30,7 +30,7 @@ on:
         required: false
 jobs:
   node_build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,6 +41,11 @@ jobs:
         with:
           node-version: ${{inputs.node_version}}
           cache: "npm"
+
+      # ✅ This step installs all dependencies (fixes next: not found)
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ inputs.project_root_directory }}
 
       - name: Run npm script
         shell: bash
