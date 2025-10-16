@@ -36,16 +36,30 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required for full SonarQube analysis history
-      - name: Set up Node.js
+      # ✅ Cache npm + Playwright binaries to speed up install
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{inputs.node_version}}
           cache: "npm"
-
-      # ✅ This step installs all dependencies (fixes next: not found)
       - name: Install dependencies
         run: npm ci
-        working-directory: ${{ inputs.project_root_directory }}
 
       - name: Run npm script
         shell: bash
