@@ -171,15 +171,6 @@ jobs:
           name: build-output
           path: ${{inputs.project_root_directory}}/**/build
 
-      - name: Ensure unzip is installed (for SonarQube)
-        run: |
-          if ! command -v unzip &> /dev/null; then
-            echo "Installing unzip..."
-            apt-get update && apt-get install -y unzip
-          else
-            echo "unzip is already installed ✅"
-          fi
-
       - name: SonarQube Scan
         if: ${{inputs.run_sonar_scan == true}}
         uses: SonarSource/sonarqube-scan-action@v6
