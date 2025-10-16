@@ -1,7 +1,7 @@
 name: Playwirght E2E
 
 on:
-  workflow_dispatch:
+  workflow_call:
   push:
     branches: [main]
     paths:
