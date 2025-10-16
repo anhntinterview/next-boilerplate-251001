@@ -7,6 +7,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
   workflow_call:
+<<<<<<< HEAD
 concurrency:
   group: playwright-${{ github.ref }}
   cancel-in-progress: true
@@ -110,6 +111,8 @@ jobs:
       - "package-lock.json"
       - "package.json"
 
+=======
+>>>>>>> 055319b (fix(ci): remove push & pull)request out of playwright.yaml > on:)
 concurrency:
   group: playwright-${{ github.ref }}
   cancel-in-progress: true

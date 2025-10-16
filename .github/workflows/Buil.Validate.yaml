@@ -78,9 +78,24 @@ jobs:
   workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
   pull_request:
     branches: [main]
+<<<<<<< HEAD
 >>>>>>> d5ed159 (fix(format): prettier)
+=======
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.*"
+      - "package-lock.json"
+      - "package.json"
+>>>>>>> 055319b (fix(ci): remove push & pull)request out of playwright.yaml > on:)
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
