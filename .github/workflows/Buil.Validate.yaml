@@ -1,11 +1,11 @@
 name: Build.Validate
 
 on:
+    workflow_dispatch:
     push:
         branches: [main]
     pull_request:
         branches: [main]
-    workflow_dispatch:
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
