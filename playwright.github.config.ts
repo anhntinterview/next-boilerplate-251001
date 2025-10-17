@@ -1,12 +1,25 @@
 /* eslint-disable no-restricted-imports */
+import fs from "fs";
 import path from "path";
 import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 
-dotenv.config({
-  path: path.resolve(process.cwd(), ".env"),
-  override: false,
-});
+const repoPath = process.cwd();
+const runnerEnvPath = path.resolve(repoPath, "../../../.env");
+const localEnvPath = path.resolve(repoPath, ".env");
+
+const envPath = fs.existsSync(localEnvPath)
+  ? localEnvPath
+  : fs.existsSync(runnerEnvPath)
+    ? runnerEnvPath
+    : null;
+
+if (envPath) {
+  console.log(`[dotenv] Loading environment from: ${envPath}`);
+  dotenv.config({ path: envPath, override: false });
+} else {
+  console.warn("[dotenv] No .env file found — skipping.");
+}
 
 if (!process.env.SECRET_API_KEY) {
   throw new Error("SECRET_API_KEY is required to run these tests.");
@@ -27,11 +40,13 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: true,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: Number(process.env.CI) ? 2 : 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // Use a more readable reporter for local/self-hosted runs
-  reporter: process.env.CI ? "blob" : [["list"], ["html", { open: "never" }]],
+  reporter: Number(process.env.CI)
+    ? "blob"
+    : [["list"], ["html", { open: "never" }]],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
