@@ -1,0 +1,39 @@
+name: Sync Tag to Commit SHA
+
+on:
+    push:
+        tags:
+            - v1
+
+permissions:
+    contents: write
+
+jobs:
+    sync-tag:
+        name: Sync v1 Tag to Immutable SHA Tag
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Extract commit SHA
+              id: vars
+              run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+            - name: Create new immutable tag
+              run: |
+                  SHORT_SHA=$(echo "${{steps.vars.outputs.sha}}" | cut -c1-7)
+                  NEW_TAG="ssre-${SHORT_SHA}"
+
+                  echo "Creating new tag: $NEW_TAG"
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
+                  if git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
+                    echo "Tag $NEW_TAG already exists — skipping."
+                  else
+                    git tag -a "$NEW_TAG" -m "Immutable tag for commit ${{ steps.vars.outputs.sha }}"
+                    git push origin "$NEW_TAG"
+                  fi
