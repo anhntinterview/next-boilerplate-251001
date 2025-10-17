@@ -42,6 +42,6 @@ jobs:
     with:
       dockerfile_path: ./Dockerfile
       image_name: next-boilerplate-251001
-      image_tag: V0.1.0
+      image_tag: v0.1.0
       run_docker_publish: true
-      image_subdirectory: internal/frontend
+      image_subdirectory: .
