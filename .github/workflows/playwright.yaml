@@ -17,13 +17,6 @@ jobs:
         shardTotal: [4]
     timeout-minutes: 60
     runs-on: [self-hosted, Linux, X64]
-    env: # Set environment variables
-      PLAYWRIGHT_TIMEOUT: 60000
-      PLAYWRIGHT_EXPECT_TIMEOUT: 5000
-      CI: true
-      PLAYWRIGHT_LOGGING_LEVEL: 1
-      BASE_URL: http://localhost:3001
-      SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -67,10 +60,6 @@ jobs:
         run: npm run build:playwright
 
       - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
-        env:
-          PORT: 3001
-          BASE_URL: http://localhost:3001
-          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
         run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
 
       - name: Upload Playwright artifacts (Shard ${{ matrix.shardIndex }})
