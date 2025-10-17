@@ -37,6 +37,7 @@ jobs:
     name: Validate.Lint.Actions
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@ci/setup-workflows
 
   # 2. Validate PR Title (Conventional Commit)
@@ -118,12 +119,15 @@ jobs:
 =======
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
 >>>>>>> a15892b (fix(ci): revert code)
+=======
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@ci/setup-workflows
+>>>>>>> 8c522fe (fix(ci): remove version to easier adding file)
 
   # 2. Validate PR Title (Conventional Commit)
   lint-pr:
     name: Validate.Lint.PR
     if: ${{ github.event_name == 'pull_request' }}
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@ci/setup-workflows
 
 <<<<<<< HEAD
     # 3. Node Build + Sonar Scan + Docker Build Validation
@@ -194,7 +198,7 @@ jobs:
     name: Node.Build.Validate
     needs: [lint-actions, lint-pr]
     if: ${{ (github.event_name != 'pull_request' || needs.lint-pr.result == 'success') && needs.lint-actions.result == 'success' }}
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@ci/setup-workflows
     with:
       node_version: 20
       project_root_directory: "."
@@ -208,6 +212,7 @@ jobs:
     if: ${{needs.node-build.result == 'success'}}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
 >>>>>>> d5ed159 (fix(format): prettier)
 =======
@@ -216,3 +221,6 @@ jobs:
 =======
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
 >>>>>>> a15892b (fix(ci): revert code)
+=======
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@ci/setup-workflows
+>>>>>>> 8c522fe (fix(ci): remove version to easier adding file)
