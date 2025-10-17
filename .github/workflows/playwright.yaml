@@ -23,6 +23,7 @@ jobs:
         shardTotal: [4]
     timeout-minutes: 60
     runs-on: [self-hosted, Linux, X64]
+<<<<<<< HEAD
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -136,6 +137,8 @@ jobs:
       PLAYWRIGHT_LOGGING_LEVEL: 1
       BASE_URL: http://localhost:3001
       SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
+=======
+>>>>>>> 2393f67 (fix(ci-playwright): remove env inside yaml cause they are implemented in self-hosted)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -179,10 +182,6 @@ jobs:
         run: npm run build:playwright
 
       - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
-        env:
-          PORT: 3001
-          BASE_URL: http://localhost:3001
-          SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
         run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
 
 <<<<<<< HEAD
