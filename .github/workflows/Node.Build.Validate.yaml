@@ -161,7 +161,11 @@ jobs:
     with:
       dockerfile_path: ./Dockerfile
       image_name: next-boilerplate-251001
-      image_tag: V0.1.0
+      image_tag: v0.1.0
       run_docker_publish: true
+<<<<<<< HEAD
       image_subdirectory: internal/frontend
 >>>>>>> d5ed159 (fix(format): prettier)
+=======
+      image_subdirectory: .
+>>>>>>> fdbe1d9 (fix(ci-docker-publish): update image_subdirectory)
