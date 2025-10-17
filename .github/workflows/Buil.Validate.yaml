@@ -31,20 +31,20 @@ jobs:
   # 1. Lint GitHub Actions / YAML
   lint-actions:
     name: Validate.Lint.Actions
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@0bc1d81984a1288a722e71e0d6816df932cf8bbc
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.Actions.yaml@v1
 
   # 2. Validate PR Title (Conventional Commit)
   lint-pr:
     name: Validate.Lint.PR
     if: ${{ github.event_name == 'pull_request' }}
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@0bc1d81984a1288a722e71e0d6816df932cf8bbc
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/_Validate.Lint.PR.yaml@v1
 
   # 3. Node Build + Sonar Scan + Docker Build Validation
   node-build:
     name: Node.Build.Validate
     needs: [lint-actions, lint-pr]
     if: ${{ (github.event_name != 'pull_request' || needs.lint-pr.result == 'success') && needs.lint-actions.result == 'success' }}
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@0bc1d81984a1288a722e71e0d6816df932cf8bbc
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Validate.yaml@v1
     with:
       node_version: 20
       project_root_directory: "."
@@ -56,4 +56,4 @@ jobs:
     name: Playwright.E2E
     needs: [node-build]
     if: ${{needs.node-build.result == 'success'}}
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@0bc1d81984a1288a722e71e0d6816df932cf8bbc
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/playwright.yaml@v1
