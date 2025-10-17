@@ -13,33 +13,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+      # ✅ Use official SSH action (safer and cleaner than manual setup)
+      - name: Setup SSH connection
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
+      # ✅ Add known hosts (avoids "host authenticity" prompt)
+      - name: Add known hosts
+        run: ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      # ✅ Pull the new Docker image on remote server
       - name: Pull latest Docker image
         run: |
           echo "🔄 Pulling Docker image for version: ${{ github.event.client_payload.ref }}"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
-          "
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
+            "docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}"
 
+      # ✅ Deploy container (stop old, start new)
       - name: Deploy container
         run: |
           echo "🚀 Deploying version: ${{ github.event.client_payload.ref }}"
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            docker stop next-boilerplate-frontend || true
-            docker rm next-boilerplate-frontend || true
+            set -e
+            docker stop next-boilerplate-frontend 2>/dev/null || true
+            docker rm next-boilerplate-frontend 2>/dev/null || true
             docker run -d \
               --name next-boilerplate-frontend \
+              --restart=always \
               -p 3000:3000 \
+              --env-file /opt/next-boilerplate/.env \
               ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
           "
 
+      # ✅ Verify the new container is running and healthy
       - name: Verify deployment
         run: |
           echo "✅ Verifying deployment..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "docker ps | grep next-boilerplate-frontend"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+            docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
+          "
