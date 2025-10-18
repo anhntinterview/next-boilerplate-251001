@@ -1,0 +1,14 @@
+name: Message After PR
+
+on:
+    pull_request:
+        types:
+            - closed
+
+jobs:
+    print-messages:
+        if: github.event.pull_request.merged == true
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print confirmation message
+              run: echo "The PR has been merged! Workflow run successfully"
