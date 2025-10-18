@@ -33,7 +33,8 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
   packages: write
   id-token: write
 
