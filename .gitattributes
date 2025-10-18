@@ -1,0 +1,2 @@
+# .gitattributes
+playwright.github.config.ts merge=ours
