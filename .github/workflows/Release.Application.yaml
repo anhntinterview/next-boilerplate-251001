@@ -37,6 +37,7 @@ on:
     #   - ".npmrc"
     #   - ".nvmrc"
     #   - "vite.config.ts"
+<<<<<<< HEAD
 
 concurrency:
   group: release-${{ github.ref }}
@@ -175,6 +176,8 @@ jobs:
 >>>>>>> d5ed159 (fix(format): prettier)
 =======
 >>>>>>> 7df20af (fix(ci): fix wrong path of Release.Application.yaml)
+=======
+>>>>>>> ee95669 (fix(ci): comment paths to test Release is executed)
 
 concurrency:
   group: release-${{ github.ref }}
