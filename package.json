@@ -21,6 +21,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start:playwright": "PORT=3001 node .next/standalone/server.js",
 =======
     "start:playwright": "npx next start --port 3001",
@@ -31,6 +32,9 @@
 =======
     "start:playwright": "PORT=3001 node .next/standalone/server.js",
 >>>>>>> 344ae0a (fix(ci-plawright): add port 3001 to npm start:playwright)
+=======
+    "start:playwright": "node .next/standalone/server.js",
+>>>>>>> b76f2b6 (fix(ci): remove PORT at package.json)
     "start:production": "NODE_ENV=production node build/server.js",
     "lint": "eslint .",
     "typecheck": "tsc -b",
