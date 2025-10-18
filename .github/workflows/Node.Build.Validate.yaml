@@ -1,10 +1,5 @@
 name: Node.Build.Validate
 on:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d5ed159 (fix(format): prettier)
   workflow_call:
     inputs:
       node_version:
@@ -24,7 +19,6 @@ on:
         required: false
       SONAR_HOST_URL:
         required: false
-<<<<<<< HEAD
 permissions:
   contents: read
   packages: write
@@ -51,121 +45,3 @@ jobs:
       image_tag: v0.1.0
       run_docker_publish: true
       image_subdirectory: .
-=======
-    workflow_dispatch:
-    push:
-        branches:
-            - "main"
-    pull_request:
-        branches: [main]
-        paths:
-            - .github/workflows/Node.Build.Validate.yaml
-            - "src/**"
-            - "package.json"
-            - "package-lock.json"
-            - "tsconfig.json"
-            - ".npmrc"
-            - ".nvmrc"
-            - ".eslintrc.json"
-            - "prettier.config.mjs"
-            - ".prettierignore"
-            - "postcss.config.mjs"
-            - "tailwind.config.ts"
-            - "next.config.mjs"
-=======
-    workflow_call:
-        inputs:
-            node_version:
-                required: true
-                type: string
-            project_root_directory:
-                required: true
-                type: string
-            npmscripts:
-                required: true
-                type: string
-            run_sonar_scan:
-                required: true
-                type: boolean
-        secrets:
-            SONAR_TOKEN:
-                required: false
-            SONAR_HOST_URL:
-                required: false
-<<<<<<< HEAD
-<<<<<<< HEAD
-            GITHUB_TOKEN:
-                required: true
->>>>>>> 586bd6d (fix(ci): change workflow_dispatch to workflow_call in Node.Build.Validate.yaml & optimize code Node.Build.Publish.yaml + Docker.Build.Publish.yaml)
-=======
->>>>>>> 39d0073 (fĩ(ci build): remove GITHUB_TOKEN)
-=======
-permissions:
-    contents: read
-    packages: write
-    id-token: write
->>>>>>> 1126455 (fix(ci): update permission)
-jobs:
-    node-build:
-        name: Node.Build
-        uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Publish.yaml@v1
-        with:
-            node_version: 20
-            project_root_directory: "."
-            npmscripts: lint,typecheck,format:check
-            run_sonar_scan: true
-        secrets:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    build-docker:
-        name: Docker.Build
-        needs: [node-build]
-        uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@v1
-        with:
-            dockerfile_path: ./Dockerfile
-            image_name: next-boilerplate-251001
-            image_tag: V0.1.0
-            run_docker_publish: true
-            image_subdirectory: internal/frontend
-<<<<<<< HEAD
-        secrets:
-<<<<<<< HEAD
-            github_token: ${{ secrets.GITHUB_TOKEN }}
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
-=======
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
->>>>>>> 7d6414b (fix(ci): wrong secrets word)
-=======
->>>>>>> a469fdf (fix(ci): remove GITHUB_TOKEN input)
-=======
-permissions:
-  contents: read
-  packages: write
-  id-token: write
-jobs:
-  node-build:
-    name: Node.Build
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Node.Build.Publish.yaml@ci/setup-workflows
-    with:
-      node_version: 20
-      project_root_directory: "."
-      npmscripts: lint,typecheck,format:check
-      run_sonar_scan: true
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-  build-docker:
-    name: Docker.Build
-    needs: [node-build]
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows
-    with:
-      dockerfile_path: ./Dockerfile
-      image_name: next-boilerplate-251001
-      image_tag: v0.1.0
-      run_docker_publish: true
-<<<<<<< HEAD
-      image_subdirectory: internal/frontend
->>>>>>> d5ed159 (fix(format): prettier)
-=======
-      image_subdirectory: .
->>>>>>> fdbe1d9 (fix(ci-docker-publish): update image_subdirectory)

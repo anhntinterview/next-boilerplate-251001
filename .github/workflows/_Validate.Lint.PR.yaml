@@ -1,32 +1,12 @@
 name: _Validate.Lint.PR
 
 on:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   workflow_call:
-=======
->>>>>>> 46d1b4c (fix(ci): actionlint)
-=======
-  workflow_call:
->>>>>>> acc18b1 (fix(ci): workflow_call to sub yaml file)
-=======
->>>>>>> c21f672 (fix: revert)
-=======
-  workflow_dispatch:
->>>>>>> 40db188 (fix: update)
-=======
-  workflow_call:
->>>>>>> 49ff293 (fix(ci): update workflow_call)
   pull_request:
     types:
       - opened
       - edited
       - reopened
-<<<<<<< HEAD
 defaults:
   run:
     shell: bash
@@ -76,67 +56,3 @@ jobs:
       - name: Report failure
         if: failure()
         run: echo "🚨 PR title validation failed! Please fix your PR title."
-=======
-    pull_request:
-        types:
-            - opened
-            - edited
-            - reopened
-=======
->>>>>>> 46d1b4c (fix(ci): actionlint)
-defaults:
-  run:
-    shell: bash
-
-jobs:
-  validate-pr-title:
-    name: Validate.PR.Title
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'release-please--')
-
-    steps:
-      - name: Validate PR title format
-        id: validate
-        env:
-          TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          echo "🧪 Validating PR title format...."
-
-          #Extract PR title
-          echo "PR Title: \"$TITLE\""
-
-          #Allowed types
-          ALLOWED_TYPES="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|deps"
-
-          #Regex for Conventional Commit style: type(optional-scope): message
-          REGEX="^(${ALLOWED_TYPES})(\([a-zA-Z0-9_-]+\))?: .+"
-
-          if [[ "$TITLE" =~ $REGEX ]]; then
-            echo "✅ PR title format is valid."
-          else
-            echo "❌ Invalid PR title format."
-            echo "Your title must follow Conventional Commit style."
-            echo ""
-            echo "Examples of valid titles:"
-            echo "  feat: add login page"
-            echo "  fix(auth): handle token refresh"
-            echo "  docs: update README"
-            echo ""
-            echo "Allowed types: ${ALLOWED_TYPES}"
-            exit 1
-          fi
-
-      - name: Report success
-        if: success()
-        run: echo "🎉 PR title validation passed!"
-
-<<<<<<< HEAD
-            - name: Report failure
-              if: failure()
-              run: echo "🚨 PR title validation failed! Please fix your PR title."
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
-=======
-      - name: Report failure
-        if: failure()
-        run: echo "🚨 PR title validation failed! Please fix your PR title."
->>>>>>> 46d1b4c (fix(ci): actionlint)

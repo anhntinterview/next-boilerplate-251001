@@ -1,13 +1,7 @@
 name: Playwirght E2E
 
 on:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   workflow_call:
-<<<<<<< HEAD
 concurrency:
   group: playwright-${{ github.ref }}
   cancel-in-progress: true
@@ -23,7 +17,6 @@ jobs:
         shardTotal: [4]
     timeout-minutes: 60
     runs-on: [self-hosted, Linux, X64]
-<<<<<<< HEAD
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -75,128 +68,3 @@ jobs:
         with:
           name: playwright-artifacts-shard-${{ matrix.shardIndex }}-run-${{ github.run_attempt }}
           path: test-results/
-=======
-    pull_request:
-        branches: [main]
-    push:
-        branches:
-            - "main"
-=======
-  pull_request:
-    branches: [main]
-  push:
-    branches:
-      - "main"
->>>>>>> 446d5aa (fix(ci): fix command actionlint, playwright wrong runs-on spelling word & yamllint config)
-=======
-=======
-  workflow_dispatch:
->>>>>>> 40db188 (fix: update)
-=======
-  workflow_call:
->>>>>>> 49ff293 (fix(ci): update workflow_call)
-  push:
-    branches: [main]
-    paths:
-      - "src/**"
-      - "tests/**"
-      - "playwright.config.*"
-      - "package-lock.json"
-      - "package.json"
-  pull_request:
-    branches: [main]
-    paths:
-      - "src/**"
-      - "tests/**"
-      - "playwright.config.*"
-      - "package-lock.json"
-      - "package.json"
-
-=======
->>>>>>> 055319b (fix(ci): remove push & pull)request out of playwright.yaml > on:)
-concurrency:
-  group: playwright-${{ github.ref }}
-  cancel-in-progress: true
->>>>>>> ab6b35d (fix(ci): cancel previous commit to focus on current commit is run)
-
-jobs:
-  tests:
-    strategy:
-      fail-fast: false
-      max-parallel: 9
-      matrix:
-        browser: [chromium]
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
-    timeout-minutes: 60
-    runs-on: [self-hosted, Linux, X64]
-    env: # Set environment variables
-      PLAYWRIGHT_TIMEOUT: 60000
-      PLAYWRIGHT_EXPECT_TIMEOUT: 5000
-      CI: true
-      PLAYWRIGHT_LOGGING_LEVEL: 1
-      BASE_URL: http://localhost:3001
-      SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
-=======
->>>>>>> 2393f67 (fix(ci-playwright): remove env inside yaml cause they are implemented in self-hosted)
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-        # ✅ Cache npm + Playwright binaries to speed up install
-      - name: Cache npm dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Chromium Browser
-        run: npx playwright install chromium
-
-      # ✅ Download pre-built app artifact if it exists (to skip rebuild)
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-        continue-on-error: true
-
-      - name: Build the app for Playwright
-        run: npm run build:playwright
-
-      - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
-        run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
-
-<<<<<<< HEAD
-            - name: Upload Playwright artifacts (Shard ${{ matrix.shardIndex }})
-              if: always()
-              uses: actions/upload-artifact@v4
-              with:
-                  name: playwright-artifacts-shard-${{ matrix.shardIndex }}-run-${{ github.run_attempt }}
-                  path: test-results/
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
-=======
-      - name: Upload Playwright artifacts (Shard ${{ matrix.shardIndex }})
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-artifacts-shard-${{ matrix.shardIndex }}-run-${{ github.run_attempt }}
-          path: test-results/
->>>>>>> 446d5aa (fix(ci): fix command actionlint, playwright wrong runs-on spelling word & yamllint config)

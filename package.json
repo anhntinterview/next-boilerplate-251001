@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 552afb2 (fix(ci): update correct SonarSource action & publish info package to Github Packages)
   "name": "@anhntinterview/next-boilerplate-251001",
   "version": "0.1.0",
   "private": false,
@@ -18,27 +14,7 @@
     "build:playwright:dev": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true npx next build",
     "postbuild": "node scripts/build.js",
     "start": "npx next start",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     "start:playwright": "PORT=3001 node .next/standalone/server.js",
-=======
-    "start:playwright": "npx next start --port 3001",
->>>>>>> e28ece6 (fix(ci): update command using next start while run npm start for playwright)
-=======
-    "start:playwright": "node .next/standalone/server.js",
->>>>>>> 22b562d (fix(ci): update start:playwright)
-=======
-    "start:playwright": "PORT=3001 node .next/standalone/server.js",
->>>>>>> 344ae0a (fix(ci-plawright): add port 3001 to npm start:playwright)
-=======
-    "start:playwright": "node .next/standalone/server.js",
->>>>>>> b76f2b6 (fix(ci): remove PORT at package.json)
-=======
-    "start:playwright": "PORT=3001 node .next/standalone/server.js",
->>>>>>> 31de40d (fix(ci-playwright): remove verify)
     "start:production": "NODE_ENV=production node build/server.js",
     "lint": "eslint .",
     "typecheck": "tsc -b",
@@ -113,96 +89,5 @@
     "react": "$react",
     "react-dom": "$react-dom",
     "storybook": "$storybook"
-=======
-  "name": "next-boilerplate-251001",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "build:ci": "next build && node scripts/build-ci.js",
-    "build:playwright": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true next build",
-    "postbuild": "node scripts/build.js",
-    "start": "node build/server.js",
-    "start:production": "NODE_ENV=production node build/server.js",
-    "lint": "next lint",
-    "typecheck": "tsc -b",
-    "test": "cross-env TZ=UTC vitest",
-    "test:coverage": "cross-env TZ=UTC vitest --coverage",
-    "test:playwright": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true TZ=UTC npx playwright test",
-    "test:playwright:ui": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true TZ=UTC npx playwright test --ui",
-    "test:playwright:debug": "cross-env NEXT_PUBLIC_PLAYWRIGHT=true TZ=UTC npx playwright test --debug",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "dependencies": {
-    "@auth0/nextjs-auth0": "^4.10.0",
-    "@tanstack/react-query": "^5.90.2",
-    "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
-    "dotenv": "^17.2.3",
-    "graphql": "^16.11.0",
-    "jwt-decode": "^4.0.0",
-    "newrelic": "^13.4.0",
-    "next": "15.5.4",
-    "next-intl": "^4.3.9",
-    "nuqs": "^2.7.0",
-    "radix-ui": "^1.4.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hook-form": "^7.63.0",
-    "tailwind-merge": "^3.3.1",
-    "tw-animate-css": "^1.4.0",
-    "uuid": "^13.0.0",
-    "zod": "^4.1.11"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@graphql-codegen/cli": "^6.0.0",
-    "@graphql-codegen/schema-ast": "^5.0.0",
-    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
-    "@playwright/test": "^1.55.1",
-    "@storybook/addon-a11y": "^9.1.10",
-    "@storybook/addon-docs": "^9.1.10",
-    "@storybook/addon-links": "^9.1.10",
-    "@storybook/addon-themes": "^9.1.10",
-    "@storybook/nextjs": "^9.1.10",
-    "@tailwindcss/postcss": "^4.1.14",
-    "@types/dotenv": "^8.2.3",
-    "@types/newrelic": "^9.14.8",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitest/coverage-istanbul": "^3.2.4",
-    "cross-env": "^10.1.0",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.4",
-<<<<<<< HEAD
-    "@eslint/eslintrc": "^3"
->>>>>>> 32d98d4 (Initial commit from Create Next App)
-=======
-    "eslint-plugin-playwright": "^2.2.2",
-    "fs-extra": "^11.3.2",
-    "msw": "^2.11.3",
-    "node-cache": "^5.1.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "storybook": "^9.1.10",
-    "storybook-addon-rtl": "^2.0.0",
-    "storybook-next-intl": "^2.0.13",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vite": "^7.1.9",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
-<<<<<<< HEAD
->>>>>>> 0156483 (initial commit)
-=======
-  },
-  "overrides": {
-    "react": "$react",
-    "react-dom": "$react-dom",
-    "storybook": "$storybook"
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
   }
 }

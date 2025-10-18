@@ -11,8 +11,8 @@ const localEnvPath = path.resolve(repoPath, ".env");
 const envPath = fs.existsSync(localEnvPath)
   ? localEnvPath
   : fs.existsSync(runnerEnvPath)
-    ? runnerEnvPath
-    : null;
+  ? runnerEnvPath
+  : null;
 
 if (envPath) {
   console.log(`[dotenv] Loading environment from: ${envPath}`);

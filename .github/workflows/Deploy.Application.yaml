@@ -1,8 +1,6 @@
 name: Deploy.Application
 
 on:
-<<<<<<< HEAD
-<<<<<<< HEAD
   repository_dispatch:
     types: [artifacts-published]
 
@@ -20,7 +18,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
-<<<<<<< HEAD
 
       # ✅ Add known hosts (avoids "host authenticity" prompt)
       - name: Add known hosts
@@ -56,78 +53,3 @@ jobs:
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
             docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
           "
-=======
-    repository_dispatch:
-        types: [artifacts-published]
-=======
-  repository_dispatch:
-    types: [artifacts-published]
->>>>>>> d5ed159 (fix(format): prettier)
-
-jobs:
-  deploy:
-    name: Deploy to Server
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-=======
->>>>>>> c25650f (fix(ci): update release & deploy)
-
-      # ✅ Add known hosts (avoids "host authenticity" prompt)
-      - name: Add known hosts
-        run: ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-
-      # ✅ Pull the new Docker image on remote server
-      - name: Pull latest Docker image
-        run: |
-          echo "🔄 Pulling Docker image for version: ${{ github.event.client_payload.ref }}"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-            "docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}"
-
-      # ✅ Deploy container (stop old, start new)
-      - name: Deploy container
-        run: |
-          echo "🚀 Deploying version: ${{ github.event.client_payload.ref }}"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            set -e
-            docker stop next-boilerplate-frontend 2>/dev/null || true
-            docker rm next-boilerplate-frontend 2>/dev/null || true
-            docker run -d \
-              --name next-boilerplate-frontend \
-              --restart=always \
-              -p 3000:3000 \
-              --env-file /opt/next-boilerplate/.env \
-              ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
-          "
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-            - name: Verify deployment
-              run: |
-                  echo "✅ Verifying deployment..."
-                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "docker ps | grep next-boilerplate-frontend"
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
-=======
-      - name: Verify deployment
-        run: |
-          echo "✅ Verifying deployment..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "docker ps | grep next-boilerplate-frontend"
->>>>>>> d5ed159 (fix(format): prettier)
-=======
-      # ✅ Verify the new container is running and healthy
-      - name: Verify deployment
-        run: |
-          echo "✅ Verifying deployment..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
-          "
->>>>>>> c25650f (fix(ci): update release & deploy)

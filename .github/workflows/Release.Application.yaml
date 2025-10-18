@@ -1,23 +1,13 @@
 name: Release.Application
 
 on:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   # ✅ Manual trigger for hotfixes or custom releases
-=======
->>>>>>> d5ed159 (fix(format): prettier)
-=======
-  # ✅ Manual trigger for hotfixes or custom releases
->>>>>>> c25650f (fix(ci): update release & deploy)
   workflow_dispatch:
     inputs:
       manual_docker_tag:
         required: true
         description: Set manual version of docker tag
         type: string
-<<<<<<< HEAD
-<<<<<<< HEAD
 
   # ✅ Only trigger on merge to main (after PR approval)
   push:
@@ -37,24 +27,14 @@ on:
     #   - ".npmrc"
     #   - ".nvmrc"
     #   - "vite.config.ts"
-<<<<<<< HEAD
 
 concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
-<<<<<<< HEAD
-<<<<<<< HEAD
   contents: write
   pull-requests: write
-=======
-  contents: read
->>>>>>> e906a68 (fix(ci): provide permission)
-=======
-  contents: write
-  pull-requests: write
->>>>>>> 46a4963 (fix(ci): enable pull_request + contents permission)
   packages: write
   id-token: write
 
@@ -135,167 +115,3 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/repos/${{ github.repository }}/dispatches \
             -d "{\"event_type\": \"artifacts-published\", \"client_payload\": {\"ref\": \"v${{ needs.release.outputs.major }}.${{ needs.release.outputs.minor }}.${{ needs.release.outputs.patch }}\"}}"
-=======
-    workflow_dispatch:
-        inputs:
-            manual_docker_tag:
-                required: true
-                description: Set manual version of docker tag
-                type: string
-    push:
-        branches: [main]
-        paths:
-            - .github/workflows/Release.Application.yaml
-            - "src/**"
-            - release-please-config.json
-            - .release-please-manifest.json
-            - "index.html"
-            - "package.json"
-            - "package-lock.json"
-            - "tsconfig.json"
-            - "tsconfig.node.json"
-            - ".npmrc"
-            - ".nvmrc"
-            - "vite.config.ts"
-            - "docker/**"
-=======
-=======
-
-  # ✅ Only trigger on merge to main (after PR approval)
->>>>>>> c25650f (fix(ci): update release & deploy)
-  push:
-    branches:
-      - main
-    # Optional: only trigger if relevant files changed
-    paths:
-      - "Release.Application.yaml"
-      - "src/**"
-      - "release-please-config.json"
-      - ".release-please-manifest.json"
-      - "index.html"
-      - "package.json"
-      - "package-lock.json"
-      - "tsconfig.json"
-      - "tsconfig.node.json"
-      - ".npmrc"
-      - ".nvmrc"
-      - "vite.config.ts"
-<<<<<<< HEAD
-      - "docker/**"
->>>>>>> d5ed159 (fix(format): prettier)
-=======
->>>>>>> 7df20af (fix(ci): fix wrong path of Release.Application.yaml)
-=======
->>>>>>> ee95669 (fix(ci): comment paths to test Release is executed)
-
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: false
-
-jobs:
-  release:
-    name: Release.Please
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release-please.outputs.release_created }}
-      docker_tag: ${{ steps.versions.outputs.docker_tag }}
-      major: ${{ steps.release-please.outputs.major }}
-      minor: ${{ steps.release-please.outputs.minor }}
-      patch: ${{ steps.release-please.outputs.patch }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # 🔹 Automated semantic versioning & changelog
-      - name: Release Please
-        id: release-please
-        uses: googleapis/release-please-action@v4
-        with:
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      # 🔹 Extract version for Docker tag
-      - name: Set Docker tag
-        id: versions
-        run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "docker_tag=${{ inputs.manual_docker_tag }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "docker_tag=$(jq -r '."."' .release-please-manifest.json)" >> "$GITHUB_OUTPUT"
-          fi
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    trigger-deployment:
-        name: Trigger.Deployment
-        runs-on: ubuntu-latest
-        needs:
-            - release
-            - build-and-publish-docker
-        if: (needs.release.outputs.release_created == 'true')
-        steps:
-            - name: Dispatch deployment event
-              run: |
-                  echo "🚀 Triggering deployment event..."
-                  curl -X POST \
-                      -H "Accept: application/vnd.github+json" \
-                      -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                      https://api.github.com/repos/${{ github.repository }}/dispatches \
-                      -d "{\"event_type\": \"artifacts-published\", \"client_payload\": {\"ref\": \"v${{ needs.release.outputs.major }}.${{ needs.release.outputs.minor }}.${{ needs.release.outputs.patch }}\"}}"
->>>>>>> 5654635 (ci: add reusable workflows and full CI/CD pipeline setup)
-=======
-=======
-  # ✅ Docker build and publish job (runs only after release)
->>>>>>> c25650f (fix(ci): update release & deploy)
-  build-and-publish-docker:
-    name: Docker.Build.Publish
-    needs: release
-    if: (needs.release.outputs.release_created == 'true') || (github.event_name == 'workflow_dispatch')
-    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows
-    with:
-      dockerfile_path: ./Dockerfile
-      image_name: next-boilerplate-251001
-      image_tag: ${{ needs.release.outputs.docker_tag }}
-      run_docker_publish: true
-      image_subdirectory: internal/frontend
-
-  # ✅ Create GitHub tag job (after Docker build)
-  create-github-tags:
-    name: Create.GitHub.Tags
-    needs:
-      - release
-      - build-and-publish-docker
-    if: needs.release.outputs.release_created == 'true'
-    uses: ./.github/workflows/Create.GitHub.Tag.yaml
-    with:
-      major: ${{ needs.release.outputs.major }}
-      minor: ${{ needs.release.outputs.minor }}
-      patch: ${{ needs.release.outputs.patch }}
-
-  # ✅ Trigger deployment event (optional)
-  trigger-deployment:
-    name: Trigger.Deployment
-    runs-on: ubuntu-latest
-    needs:
-      - release
-      - build-and-publish-docker
-    if: needs.release.outputs.release_created == 'true'
-    steps:
-      - name: Dispatch deployment event
-        run: |
-          echo "🚀 Triggering deployment event..."
-          curl -X POST \
-<<<<<<< HEAD
-              -H "Accept: application/vnd.github+json" \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${{ github.repository }}/dispatches \
-              -d "{\"event_type\": \"artifacts-published\", \"client_payload\": {\"ref\": \"v${{ needs.release.outputs.major }}.${{ needs.release.outputs.minor }}.${{ needs.release.outputs.patch }}\"}}"
->>>>>>> d5ed159 (fix(format): prettier)
-=======
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/dispatches \
-            -d "{\"event_type\": \"artifacts-published\", \"client_payload\": {\"ref\": \"v${{ needs.release.outputs.major }}.${{ needs.release.outputs.minor }}.${{ needs.release.outputs.patch }}\"}}"
->>>>>>> c25650f (fix(ci): update release & deploy)
