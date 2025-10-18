@@ -45,11 +45,16 @@ concurrency:
 
 permissions:
 <<<<<<< HEAD
+<<<<<<< HEAD
   contents: write
   pull-requests: write
 =======
   contents: read
 >>>>>>> e906a68 (fix(ci): provide permission)
+=======
+  contents: write
+  pull-requests: write
+>>>>>>> 46a4963 (fix(ci): enable pull_request + contents permission)
   packages: write
   id-token: write
 
