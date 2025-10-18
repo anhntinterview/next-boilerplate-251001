@@ -1,5 +1,5 @@
 {
-  "group-pull-request-title-pattern": "chore${scope}: release",
+  "group-pull-request-title-pattern": "chore(${scope}): release",
   "release-type": "node",
   "include-component-in-tag": false,
   "packages": {
@@ -49,12 +49,12 @@
     {
       "type": "test",
       "section": "Tests",
-      "hidden": "true"
+      "hidden": true
     },
     {
       "type": "ci",
       "section": "Continuous Integration",
-      "hidden": "true"
+      "hidden": true
     }
   ]
 }
