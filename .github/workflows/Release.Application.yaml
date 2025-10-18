@@ -158,10 +158,10 @@ jobs:
       - main
     # Optional: only trigger if relevant files changed
     paths:
-      - .github/workflows/Release.Application.yaml
+      - "Release.Application.yaml"
       - "src/**"
-      - release-please-config.json
-      - .release-please-manifest.json
+      - "release-please-config.json"
+      - ".release-please-manifest.json"
       - "index.html"
       - "package.json"
       - "package-lock.json"
@@ -170,8 +170,11 @@ jobs:
       - ".npmrc"
       - ".nvmrc"
       - "vite.config.ts"
+<<<<<<< HEAD
       - "docker/**"
 >>>>>>> d5ed159 (fix(format): prettier)
+=======
+>>>>>>> 7df20af (fix(ci): fix wrong path of Release.Application.yaml)
 
 concurrency:
   group: release-${{ github.ref }}
