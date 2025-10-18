@@ -32,6 +32,11 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 jobs:
   release:
     name: Release.Please
