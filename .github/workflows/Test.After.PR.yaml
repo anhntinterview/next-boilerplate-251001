@@ -1,14 +1,24 @@
 name: Message After PR
 
 on:
-    pull_request:
-        types:
-            - closed
+  workflow_dispatch:
+    inputs:
+      manual_docker_tag:
+        required: true
+        description: Set manual version of docker tag
+        type: string
+  push:
+    branches:
+      - main
 
 jobs:
-    print-messages:
-        if: github.event.pull_request.merged == true
-        runs-on: ubuntu-latest
-        steps:
-            - name: Print confirmation message
-              run: echo "The PR has been merged! Workflow run successfully"
+  print-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print confirmation message
+        run: |
+          echo "The PR has been merged! Workflow run successfully"
+          echo "🔹 Repository: ${{ github.repository }}"
+          echo "🔹 Actor: ${{ github.actor }}"
+          echo "🔹 Commit SHA: ${{ github.sha }}"
+          echo "🔹 Branch: ${{ github.ref_name }}"
