@@ -23,7 +23,7 @@ jobs:
         env:
           TITLE: ${{ github.event.pull_request.title }}
         run: |
-          echo "🧪 Validating PR title format..."
+          echo "🧪 Validating PR title format...."
 
           #Extract PR title
           echo "PR Title: \"$TITLE\""
