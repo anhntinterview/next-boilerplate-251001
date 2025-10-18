@@ -58,6 +58,8 @@ jobs:
         id: release-please
         uses: googleapis/release-please-action@v4
         with:
+          command: manifest
+          bootstrap-sha: 9a9ced876a3659d4c6014e9296b89006665149d0
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
