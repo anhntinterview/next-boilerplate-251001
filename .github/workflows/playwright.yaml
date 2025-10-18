@@ -59,13 +59,6 @@ jobs:
       - name: Build the app for Playwright
         run: npm run build:playwright
 
-      - name: Verify server startup
-        run: |
-          npm run start:playwright &
-          sleep 5
-          curl -v http://localhost:3001 || echo "App not responding"
-          pkill -f "node .next/standalone/server.js" || true
-
       - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
         run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
 
