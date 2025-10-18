@@ -44,8 +44,12 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
+<<<<<<< HEAD
   contents: write
   pull-requests: write
+=======
+  contents: read
+>>>>>>> e906a68 (fix(ci): provide permission)
   packages: write
   id-token: write
 
