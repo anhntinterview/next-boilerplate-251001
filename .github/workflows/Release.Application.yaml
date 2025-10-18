@@ -15,10 +15,10 @@ on:
       - main
     # Optional: only trigger if relevant files changed
     paths:
-      - .github/workflows/Release.Application.yaml
+      - "Release.Application.yaml"
       - "src/**"
-      - release-please-config.json
-      - .release-please-manifest.json
+      - "release-please-config.json"
+      - ".release-please-manifest.json"
       - "index.html"
       - "package.json"
       - "package-lock.json"
@@ -27,7 +27,6 @@ on:
       - ".npmrc"
       - ".nvmrc"
       - "vite.config.ts"
-      - "docker/**"
 
 concurrency:
   group: release-${{ github.ref }}
