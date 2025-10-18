@@ -71,7 +71,7 @@ jobs:
     name: Docker.Build.Publish
     needs: release
     if: (needs.release.outputs.release_created == 'true') || (github.event_name == 'workflow_dispatch')
-    uses: anhntinterview/next-boilerplate-251001/main/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows
     with:
       dockerfile_path: ./Dockerfile
       image_name: next-boilerplate-251001
