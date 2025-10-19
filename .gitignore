@@ -47,8 +47,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 playwright/.auth
-playwright.github.config.ts
-playwright.config.ts
 
 # vscode
 .vscode/launch.json
