@@ -83,7 +83,7 @@ jobs:
       image_name: next-boilerplate-251001
       image_tag: ${{ needs.release.outputs.docker_tag }}
       run_docker_publish: true
-      image_subdirectory: internal/frontend
+      image_subdirectory: "."
 
   # ✅ Create GitHub tag job (after Docker build)
   create-github-tags:
