@@ -1,5 +1,5 @@
 # Base image (LTS + alpine)
-FROM ghcr.io/nodejs/node:20-alpine AS base
+FROM gcr.io/library/node:20-alpine AS base
 
 # Dependencies stage
 FROM base AS deps
