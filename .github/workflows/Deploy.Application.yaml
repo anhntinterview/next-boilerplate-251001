@@ -64,7 +64,6 @@ jobs:
               --name next-boilerplate-frontend \
               --restart=always \
               -p 3000:3000 \
-              --env-file /opt/next-boilerplate/.env \
               ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
 
             echo "🧹 Cleaning up old images..."
