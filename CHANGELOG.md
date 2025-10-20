@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.8...v0.1.9) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** resolved conflict ([#44](https://github.com/anhntinterview/next-boilerplate-251001/issues/44)) ([6a04efb](https://github.com/anhntinterview/next-boilerplate-251001/commit/6a04efba14b75f456fa7431762360956e54bc03b))
+
 ## [0.1.8](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.7...v0.1.8) (2025-10-20)
 
 
