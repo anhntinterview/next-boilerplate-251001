@@ -92,7 +92,7 @@ jobs:
       - release
       - build-and-publish-docker
     if: needs.release.outputs.release_created == 'true'
-    uses: ./.github/workflows/Create.GitHub.Tag.yaml
+    uses: anhntinterview/next-boilerplate-251001/.github/workflows/Create.GitHub.Tag.yaml@ci/setup-workflows-v2
     with:
       major: ${{ needs.release.outputs.major }}
       minor: ${{ needs.release.outputs.minor }}
