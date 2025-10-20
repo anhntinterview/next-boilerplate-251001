@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.12...v0.1.13) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** use driver:docker ([#52](https://github.com/anhntinterview/next-boilerplate-251001/issues/52)) ([e4e2cf4](https://github.com/anhntinterview/next-boilerplate-251001/commit/e4e2cf4782212774d9a3ab88b9cf69db30120fd1))
+
 ## [0.1.12](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.11...v0.1.12) (2025-10-20)
 
 
