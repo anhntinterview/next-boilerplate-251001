@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.4...v0.1.5) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** update dynamic IPA on modem ([#36](https://github.com/anhntinterview/next-boilerplate-251001/issues/36)) ([c7603d4](https://github.com/anhntinterview/next-boilerplate-251001/commit/c7603d42e4c7426156bc4bb4eaa886da702911a9))
+
 ## [0.1.4](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.3...v0.1.4) (2025-10-20)
 
 
