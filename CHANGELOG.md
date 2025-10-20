@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.5...v0.1.6) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** update ssh access ([#38](https://github.com/anhntinterview/next-boilerplate-251001/issues/38)) ([01da886](https://github.com/anhntinterview/next-boilerplate-251001/commit/01da88617d54eb60acdd9bfd2c7745fc63f27c5f))
+
 ## [0.1.5](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.4...v0.1.5) (2025-10-20)
 
 
