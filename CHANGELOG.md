@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.3...v0.1.4) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** update Deploy.Application.yaml ([#34](https://github.com/anhntinterview/next-boilerplate-251001/issues/34)) ([15a4bbc](https://github.com/anhntinterview/next-boilerplate-251001/commit/15a4bbc62ceb28f7c52f22bdfac82fd8259c5739))
+
 ## [0.1.3](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.2...v0.1.3) (2025-10-20)
 
 
