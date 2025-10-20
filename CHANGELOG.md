@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.15](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.14...v0.1.15) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** change ghcr to google cloud registry ([#56](https://github.com/anhntinterview/next-boilerplate-251001/issues/56)) ([0ac330a](https://github.com/anhntinterview/next-boilerplate-251001/commit/0ac330ab3ca5f79db8078f9903df9c2e2913eb23))
+
 ## [0.1.14](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.13...v0.1.14) (2025-10-20)
 
 
