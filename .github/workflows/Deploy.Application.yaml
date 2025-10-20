@@ -31,9 +31,10 @@ jobs:
       - name: Pull latest Docker image
         run: |
           echo "🔄 Pulling Docker image for version: ${{ github.event.client_payload.ref }}"
-          ssh -i ${{ secrets.SSH_KEYPAIR_NAME }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
+          ssh -i ${{ secrets.SSH_KEYPAIR_NAME }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
-            docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}"
+            docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
+          "
 
       # ✅ Deploy container (stop old, start new)
       - name: Deploy container
