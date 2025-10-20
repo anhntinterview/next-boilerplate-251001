@@ -39,7 +39,8 @@ jobs:
           REF="${{ github.event.client_payload.ref }}"
           TAG="${REF#v}"
           echo "🔄 Pulling Docker image for version: $TAG"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" << 'EOF'
+            TAG="$1"
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
           EOF
@@ -50,7 +51,8 @@ jobs:
           REF="${{ github.event.client_payload.ref }}"
           TAG="${REF#v}"
           echo "🚀 Deploying version: $TAG"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" << 'EOF'
+            TAG="$1"
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             set -e
             echo "🛑 Stopping old container (if exists)..."
@@ -73,6 +75,6 @@ jobs:
       - name: Verify deployment
         run: |
           echo "✅ Verifying deployment..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
             docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
-          EOF
+          "
