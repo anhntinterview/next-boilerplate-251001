@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.6...v0.1.7) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** create GHC_TOKEN to login Github Container Registry ([#40](https://github.com/anhntinterview/next-boilerplate-251001/issues/40)) ([d93966c](https://github.com/anhntinterview/next-boilerplate-251001/commit/d93966c78c28757855c626fd0aa6e2189faee843))
+
 ## [0.1.6](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.5...v0.1.6) (2025-10-20)
 
 
