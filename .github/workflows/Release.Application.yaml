@@ -87,7 +87,7 @@ jobs:
 
   # ✅ Create GitHub tag job (after Docker build)
   create-github-tags:
-    name: Create.GitHub.Tags
+    name: Create.GitHub.Tag
     needs:
       - release
       - build-and-publish-docker
