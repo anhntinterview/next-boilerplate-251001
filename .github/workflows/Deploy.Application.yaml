@@ -39,7 +39,7 @@ jobs:
           REF="${{ github.event.client_payload.ref }}"
           TAG="${REF#v}"
           echo "🔄 Pulling Docker image for version: $TAG"
-          ssh -i ${{ secrets.SSH_KEYPAIR_NAME }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
           "
@@ -47,8 +47,11 @@ jobs:
       # ✅ Deploy container (stop old, start new)
       - name: Deploy container
         run: |
-          echo "🚀 Deploying version: ${{ github.event.client_payload.ref }}"
+          REF="${{ github.event.client_payload.ref }}"
+          TAG="${REF#v}"
+          echo "🚀 Deploying version: $TAG"
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+            echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             set -e
             docker stop next-boilerplate-frontend 2>/dev/null || true
             docker rm next-boilerplate-frontend 2>/dev/null || true
@@ -57,7 +60,7 @@ jobs:
               --restart=always \
               -p 3000:3000 \
               --env-file /opt/next-boilerplate/.env \
-              ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:${{ github.event.client_payload.ref }}
+              ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
           "
 
       # ✅ Verify the new container is running and healthy
