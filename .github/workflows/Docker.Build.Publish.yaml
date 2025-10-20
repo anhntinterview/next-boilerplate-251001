@@ -36,10 +36,6 @@ jobs:
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          driver: docker
-          use: true
-          install: true
 
       - name: Log in to GitHub Container Registry
         if: ${{inputs.run_docker_publish}}
