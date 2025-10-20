@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.11...v0.1.12) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** remove env file to inject docker run ([#50](https://github.com/anhntinterview/next-boilerplate-251001/issues/50)) ([6b7acc0](https://github.com/anhntinterview/next-boilerplate-251001/commit/6b7acc0bdd031ebcca684ffd5388a64df3143b2f))
+
 ## [0.1.11](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.10...v0.1.11) (2025-10-20)
 
 
