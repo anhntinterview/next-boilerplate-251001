@@ -27,6 +27,12 @@ jobs:
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
+      # ✅ Test SSH connection before proceeding
+      - name: Test SSH connection
+        run: |
+          echo "🔍 Testing SSH connection to ${{ secrets.SERVER_HOST }}..."
+          ssh -o StrictHostKeyChecking=yes ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "echo '✅ SSH connection successful.'"
+
       # ✅ Pull the new Docker image on remote server
       - name: Pull latest Docker image
         run: |
