@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.7...v0.1.8) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** add steps test to SSH server ([#42](https://github.com/anhntinterview/next-boilerplate-251001/issues/42)) ([b5d320c](https://github.com/anhntinterview/next-boilerplate-251001/commit/b5d320c388e33be4b1c6c2bf7e71a92ec6461e6f))
+
 ## [0.1.7](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.6...v0.1.7) (2025-10-20)
 
 
