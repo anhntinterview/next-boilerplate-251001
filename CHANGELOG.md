@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.13...v0.1.14) (2025-10-20)
+
+
+### Bug Fixes
+
+* **ci:** using node by ghcr ([#54](https://github.com/anhntinterview/next-boilerplate-251001/issues/54)) ([a8a1972](https://github.com/anhntinterview/next-boilerplate-251001/commit/a8a1972124f22e366cf6e05272a36508386f8a2e))
+
 ## [0.1.13](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.12...v0.1.13) (2025-10-20)
 
 
