@@ -29,79 +29,89 @@ jobs:
       - name: Configure Nginx Reverse Proxy
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
         run: |
           echo "⚙️ Configuring Nginx reverse proxy..."
-          # shellcheck disable=SC2087
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash <<EOF
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" "$DOMAIN_NAME" <<'EOF'
             set -e
+
+            SERVER_PASSWORD="$1"
+            DOMAIN="$2"
+
             CONTAINER_NAME="next-boilerplate-frontend"
-            DOMAIN="nextjs.${{ secrets.DOMAIN_NAME }}"
             APP_PORT=3000
             NGINX_CONF="/etc/nginx/sites-available/app.conf"
 
             echo "🔍 Checking if application container is running..."
             if ! docker ps --filter "name=$CONTAINER_NAME" --filter "status=running" | grep -q "$CONTAINER_NAME"; then
-              echo "❌ Container '$CONTAINER_NAME' is not running. Aborting Nginx setup."
+              echo "❌ Container '\$CONTAINER_NAME' is not running. Aborting Nginx setup."
               exit 1
             fi
-            echo "✅ Container '$CONTAINER_NAME' is running."
+            echo "✅ Container '\$CONTAINER_NAME' is running."
 
             echo "🔍 Checking if Nginx is installed..."
             if ! command -v nginx &>/dev/null; then
               echo "📦 Installing Nginx..."
               if [ -f /etc/debian_version ]; then
-                echo "$SERVER_PASSWORD" | sudo -S apt update -y
-                echo "$SERVER_PASSWORD" | sudo -S apt install nginx -y
+                echo $SERVER_PASSWORD | sudo -S apt update -y
+                echo $SERVER_PASSWORD | sudo -S apt install nginx -y
               elif [ -f /etc/redhat-release ]; then
-                echo "$SERVER_PASSWORD" | sudo -S yum install epel-release -y
-                echo "$SERVER_PASSWORD" | sudo -S yum install nginx -y
+                echo $SERVER_PASSWORD | sudo -S yum install epel-release -y
+                echo $SERVER_PASSWORD | sudo -S yum install nginx -y
               else
                 echo "❌ Unsupported OS. Please install Nginx manually."
                 exit 1
               fi
-              echo "$SERVER_PASSWORD" | sudo -S systemctl enable nginx
-              echo "$SERVER_PASSWORD" | sudo -S systemctl start nginx
+              echo $SERVER_PASSWORD | sudo -S systemctl enable nginx
+              echo $SERVER_PASSWORD | sudo -S systemctl start nginx
               echo "✅ Nginx installed."
             else
               echo "✅ Nginx already installed."
             fi
 
             echo "🧱 Creating Nginx config for $DOMAIN ..."
-            # shellcheck disable=SC2086,SC2029
-            cat <<CONFIG | sudo tee $NGINX_CONF > /dev/null
-            server {
-              listen 80;
-              server_name $DOMAIN;
+            echo "$SERVER_PASSWORD" | sudo tee /etc/nginx/.htpasswd > /dev/null
+            sudo tee "$NGINX_CONF" > /dev/null <<CONFIG
+server {
+  listen 80;
+  server_name $DOMAIN;
 
-              location / {
-                proxy_pass http://localhost:$APP_PORT;
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade \$http_upgrade;
-                proxy_set_header Connection 'upgrade';
-                proxy_set_header Host \$host;
-                proxy_cache_bypass \$http_upgrade;
-                }
-            }
-            CONFIG
+  location / {
+    proxy_pass http://localhost:$APP_PORT;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host \$host;
+    proxy_cache_bypass \$http_upgrade;
 
-            echo "$SERVER_PASSWORD" | sudo -S ln -sf $NGINX_CONF /etc/nginx/sites-enabled/app.conf
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+  }
+}
+CONFIG
+
+            echo $SERVER_PASSWORD | sudo -S ln -sf $NGINX_CONF /etc/nginx/sites-enabled/app.conf
 
             echo "🔄 Testing Nginx configuration..."
-            echo "$SERVER_PASSWORD" | sudo -S nginx -t
+            echo $SERVER_PASSWORD | sudo -S nginx -t
 
             echo "♻️ Reloading Nginx..."
-            echo "$SERVER_PASSWORD" | sudo -S systemctl reload nginx
+            echo $SERVER_PASSWORD | sudo -S systemctl reload nginx
 
             echo "✅ Nginx has been configured and reloaded successfully."
             echo "🌐 Access your app at: http://$DOMAIN"
-          EOF
+EOF
 
       - name: Verify Nginx Status
+        env:
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           echo "🔎 Checking Nginx service status..."
-          # shellcheck disable=SC2086,SC2087,SC2029
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash <<EOF
-            if ! echo "$SERVER_PASSWORD" | sudo -S systemctl is-active --quiet nginx; then
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" <<'EOF'
+            set -e
+
+            SERVER_PASSWORD="$1"
+            if ! echo $SERVER_PASSWORD | sudo -S systemctl is-active --quiet nginx; then
               echo "❌ Nginx service is not active!"
               exit 1
             fi
