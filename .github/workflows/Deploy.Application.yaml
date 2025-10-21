@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [artifacts-published]
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     name: Deploy to Server
@@ -80,6 +83,6 @@ jobs:
       - name: Setup Nginx Reverse Proxy (if needed)
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
           repository: ${{ github.repository }}
           event-type: setup-nginx
