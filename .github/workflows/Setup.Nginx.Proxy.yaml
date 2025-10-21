@@ -97,5 +97,6 @@ jobs:
       - name: Verify Nginx Status
         run: |
           echo "🔎 Checking Nginx service status..."
+          # shellcheck disable=SC2029
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
             "echo \"$SERVER_PASSWORD\" | sudo -S systemctl status nginx --no-pager || true"
