@@ -31,7 +31,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           echo "⚙️ Configuring Nginx reverse proxy..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash <<EOF
             set -e
             CONTAINER_NAME="next-boilerplate-frontend"
             DOMAIN="nextjs.${{ secrets.DOMAIN_NAME }}"
