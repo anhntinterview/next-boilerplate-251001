@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.9](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.8...v0.2.9) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** remove - prefix CONFIG, remove password ([#84](https://github.com/anhntinterview/next-boilerplate-251001/issues/84)) ([97f2195](https://github.com/anhntinterview/next-boilerplate-251001/commit/97f21954616c0ed19c9e6b97c3720ff784341acc))
+
 ## [0.2.8](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.7...v0.2.8) (2025-10-21)
 
 
