@@ -44,10 +44,12 @@ jobs:
             echo "✅ Container '$CONTAINER_NAME' is running."
 
             echo "🔍 Checking sudo privileges..."
-            if ! sudo -n true 2>/dev/null; then
+            if ! sudo -n /usr/bin/apt install nginx -s &>/dev/null; then
               echo "❌ User does not have passwordless sudo access. Please enable it."
+              echo "🪬 Please run: echo '${USER} ALL=(ALL) NOPASSWD:/usr/bin/apt install nginx*' | sudo tee /etc/sudoers.d/nginx-install"
               exit 1
             fi
+            echo "✅ User has sudo permission to install Nginx."
 
             echo "🔍 Checking if Nginx is installed..."
             if ! command -v nginx &>/dev/null; then
