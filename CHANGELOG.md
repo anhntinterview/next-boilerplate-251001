@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.0...v0.2.1) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** create REPO_DISPATCH_TOKEN to access other action ([#68](https://github.com/anhntinterview/next-boilerplate-251001/issues/68)) ([39011ca](https://github.com/anhntinterview/next-boilerplate-251001/commit/39011ca19243faf045546e1fda42c3ea6887425a))
+
 ## [0.2.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.19...v0.2.0) (2025-10-21)
 
 
