@@ -77,3 +77,9 @@ jobs:
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
             docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
           "
+      - name: Setup Nginx Reverse Proxy (if needed)
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: setup-nginx

@@ -1,0 +1,104 @@
+name: Setup.Nginx.Proxy
+
+on:
+    workflow_dispatch:
+    repository_dispatch:
+        types: [setup-nginx]
+
+jobs:
+    setup-nginx:
+        name: Configure Nginx on Server
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup SSH
+              uses: webfactory/ssh-agent@v0.9.0
+              with:
+                  ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
+            - name: Add known hosts
+              run: |
+                  mkdir -p ~/.ssh
+                  chmod 700 ~/.ssh
+                  ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+                  chmod 644 ~/.ssh/known_hosts
+
+            - name: Configure Nginx Reverse Proxy
+              run: |
+                  echo "⚙️ Configuring Nginx reverse proxy..."
+                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash << 'EOF'
+                    set -e
+                    CONTAINER_NAME="next-boilerplate-frontend"
+                    DOMAIN="nextjs.${{ secrets.DOMAIN_NAME }}"
+                    APP_PORT=3000
+                    NGINX_CONF="/etc/nginx/sites-available/app.conf"
+
+                    echo "🔍 Checking if application container is running..."
+                    if ! docker ps --filter "name=\$CONTAINER_NAME" --filter "status=running" | grep -q "\$CONTAINER_NAME"; then
+                      echo "❌ Container '\$CONTAINER_NAME' is not running. Aborting Nginx setup."
+                      exit 1
+                    fi
+                    echo "✅ Container '\$CONTAINER_NAME' is running."
+
+                    echo "🔍 Checking sudo privileges..."
+                    if ! sudo -n true 2>/dev/null; then
+                      echo "❌ User does not have passwordless sudo access. Please enable it."
+                      exit 1
+                    fi
+
+                    echo "🔍 Checking if Nginx is installed..."
+                    if ! command -v nginx &>/dev/null; then
+                      echo "📦 Installing Nginx..."
+                      if [ -f /etc/debian_version ]; then
+                        sudo apt update -y
+                        sudo apt install nginx -y
+                      elif [ -f /etc/redhat-release ]; then
+                        sudo yum install epel-release -y
+                        sudo yum install nginx -y
+                      else
+                        echo "❌ Unsupported OS. Please install Nginx manually."
+                        exit 1
+                      fi
+                      sudo systemctl enable nginx
+                      sudo systemctl start nginx
+                      echo "✅ Nginx installed."
+                    else
+                      echo "✅ Nginx already installed."
+                    fi
+
+                    echo "🧱 Creating Nginx config for \$DOMAIN ..."
+                    sudo tee \$NGINX_CONF > /dev/null <<CONFIG
+                    server {
+                        listen 80;
+                        server_name \$DOMAIN;
+
+                        location / {
+                            proxy_pass http://localhost:\$APP_PORT;
+                            proxy_http_version 1.1;
+                            proxy_set_header Upgrade \$http_upgrade;
+                            proxy_set_header Connection 'upgrade';
+                            proxy_set_header Host \$host;
+                            proxy_cache_bypass \$http_upgrade;
+                        }
+                    }
+                    CONFIG
+
+                    sudo ln -sf \$NGINX_CONF /etc/nginx/sites-enabled/app.conf
+
+                    echo "🔄 Testing Nginx configuration..."
+                    sudo nginx -t
+
+                    echo "♻️ Reloading Nginx..."
+                    sudo systemctl reload nginx
+
+                    echo "✅ Nginx has been configured and reloaded successfully."
+                    echo "🌐 Access your app at: http://\$DOMAIN"
+                  EOF
+
+            - name: Verify Nginx Status
+              run: |
+                  echo "🔎 Checking Nginx service status..."
+                  ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "sudo systemctl status nginx --no-pager || true"
