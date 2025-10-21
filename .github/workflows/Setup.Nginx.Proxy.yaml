@@ -67,7 +67,8 @@ jobs:
             fi
 
             echo "🧱 Creating Nginx config for $DOMAIN ..."
-            cat <<'CONFIG' | echo "$SERVER_PASSWORD" | sudo -S tee $NGINX_CONF > /dev/null
+            # shellcheck disable=SC2086,SC2029
+            cat <<-CONFIG | echo "$SERVER_PASSWORD" | sudo tee $NGINX_CONF > /dev/null
             server {
                 listen 80;
                 server_name $DOMAIN;
@@ -98,6 +99,11 @@ jobs:
       - name: Verify Nginx Status
         run: |
           echo "🔎 Checking Nginx service status..."
-          # shellcheck disable=SC2029
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-            "echo \"$SERVER_PASSWORD\" | sudo -S systemctl status nginx --no-pager || true"
+          # shellcheck disable=SC2086,SC2087,SC2029
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash <<EOF
+            if ! echo "$SERVER_PASSWORD" | sudo -S systemctl is-active --quiet nginx; then
+              echo "❌ Nginx service is not active!"
+              exit 1
+            fi
+            echo "✅ Nginx service is active."
+          EOF
