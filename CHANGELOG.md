@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.4...v0.2.5) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** update Nginx setup permission ([#76](https://github.com/anhntinterview/next-boilerplate-251001/issues/76)) ([a599a0e](https://github.com/anhntinterview/next-boilerplate-251001/commit/a599a0eef6bc2d5b86ef7a2e5f533b8f8ca7f1ec))
+
 ## [0.2.4](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.3...v0.2.4) (2025-10-21)
 
 
