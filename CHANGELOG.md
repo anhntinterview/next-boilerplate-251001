@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.3...v0.2.4) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** remove sudo cause providing permission using without sudo ([#74](https://github.com/anhntinterview/next-boilerplate-251001/issues/74)) ([bfad969](https://github.com/anhntinterview/next-boilerplate-251001/commit/bfad9692ccd4d1cbd3140c1f8be5151f68c2a4ad))
+
 ## [0.2.3](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.2...v0.2.3) (2025-10-21)
 
 
