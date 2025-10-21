@@ -31,6 +31,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
         run: |
+          # shellcheck disable=SC2087
           echo "⚙️ Configuring Nginx reverse proxy..."
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" "$DOMAIN_NAME" <<'EOF'
           set -e
