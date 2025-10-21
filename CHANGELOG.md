@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.1...v0.2.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** remove single quote in EOF and remove escape character ([#70](https://github.com/anhntinterview/next-boilerplate-251001/issues/70)) ([7bc3bf5](https://github.com/anhntinterview/next-boilerplate-251001/commit/7bc3bf58435af2e7a5d94274d37cde4bd55515e8))
+
 ## [0.2.1](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.0...v0.2.1) (2025-10-21)
 
 
