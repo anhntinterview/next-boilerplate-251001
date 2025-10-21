@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.7](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.6...v0.2.7) (2025-10-21)
+
+
+### Bug Fixes
+
+* **ci:** providing password secret env, remove check privilege sudo ([#80](https://github.com/anhntinterview/next-boilerplate-251001/issues/80)) ([aed098f](https://github.com/anhntinterview/next-boilerplate-251001/commit/aed098f7010f0e45249627d7ac506575bef71a49))
+
 ## [0.2.6](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.5...v0.2.6) (2025-10-21)
 
 
