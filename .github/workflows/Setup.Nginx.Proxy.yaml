@@ -68,18 +68,18 @@ jobs:
 
             echo "🧱 Creating Nginx config for $DOMAIN ..."
             # shellcheck disable=SC2086,SC2029
-            cat <<-CONFIG | echo "$SERVER_PASSWORD" | sudo tee $NGINX_CONF > /dev/null
+            cat <<CONFIG | sudo tee $NGINX_CONF > /dev/null
             server {
-                listen 80;
-                server_name $DOMAIN;
+              listen 80;
+              server_name $DOMAIN;
 
-                location / {
-                    proxy_pass http://localhost:$APP_PORT;
-                    proxy_http_version 1.1;
-                    proxy_set_header Upgrade \$http_upgrade;
-                    proxy_set_header Connection 'upgrade';
-                    proxy_set_header Host \$host;
-                    proxy_cache_bypass \$http_upgrade;
+              location / {
+                proxy_pass http://localhost:$APP_PORT;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade \$http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host \$host;
+                proxy_cache_bypass \$http_upgrade;
                 }
             }
             CONFIG
