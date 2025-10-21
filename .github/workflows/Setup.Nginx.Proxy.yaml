@@ -46,7 +46,7 @@ jobs:
             echo "🔍 Checking sudo privileges..."
             if ! sudo -n /usr/bin/apt install nginx -s &>/dev/null; then
               echo "❌ User does not have passwordless sudo access. Please enable it."
-              echo "🪬 Please run: echo '${USER} ALL=(ALL) NOPASSWD:/usr/bin/apt install nginx*' | sudo tee /etc/sudoers.d/nginx-install"
+              echo "🪬 Please run on Ubuntu: echo '${USER} ALL=(ALL) NOPASSWD:/usr/bin/apt install nginx*' | sudo tee /etc/sudoers.d/nginx-install"
               exit 1
             fi
             echo "✅ User has sudo permission to install Nginx."
@@ -55,11 +55,11 @@ jobs:
             if ! command -v nginx &>/dev/null; then
               echo "📦 Installing Nginx..."
               if [ -f /etc/debian_version ]; then
-                sudo apt update -y
-                sudo apt install nginx -y
+                apt update -y
+                apt install nginx -y
               elif [ -f /etc/redhat-release ]; then
-                sudo yum install epel-release -y
-                sudo yum install nginx -y
+                yum install epel-release -y
+                yum install nginx -y
               else
                 echo "❌ Unsupported OS. Please install Nginx manually."
                 exit 1
