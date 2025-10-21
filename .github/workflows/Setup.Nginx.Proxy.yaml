@@ -30,8 +30,8 @@ jobs:
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          # shellcheck disable=SC2087
           echo "⚙️ Configuring Nginx reverse proxy..."
+          # shellcheck disable=SC2087
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash <<EOF
             set -e
             CONTAINER_NAME="next-boilerplate-frontend"
