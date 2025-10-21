@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.19...v0.2.0) (2025-10-21)
+
+
+### Features
+
+* **ci:** Install Nginx to register with Cloudflare ([#66](https://github.com/anhntinterview/next-boilerplate-251001/issues/66)) ([a967fce](https://github.com/anhntinterview/next-boilerplate-251001/commit/a967fce4f511fcbd24ffbe5d1abea35fe6b0a52f))
+
 ## [0.1.19](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.1.18...v0.1.19) (2025-10-21)
 
 
