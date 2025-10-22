@@ -30,13 +30,15 @@ jobs:
         env:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           echo "⚙️ Configuring Nginx reverse proxy..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" "$DOMAIN_NAME" <<'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" "$DOMAIN_NAME" "$SERVER_USER" <<'EOF'
           set -e
 
           SERVER_PASSWORD="$1"
           DOMAIN="$2"
+          SERVER_USER="$3"
 
           CONTAINER_NAME="next-boilerplate-frontend"
           APP_PORT=3000
@@ -69,8 +71,20 @@ jobs:
             echo "✅ Nginx already installed."
           fi
 
+          # Check & install htpasswd
           echo "🧱 Creating Nginx config for $DOMAIN ..."
-          echo "$SERVER_PASSWORD" | sudo -S tee /etc/nginx/.htpasswd > /dev/null
+          if ! command -v htpasswd &>/dev/null; then
+            echo "📦 Installing apache2-utils for htpasswd..."
+            echo $SERVER_PASSWORD | sudo -S apt update -y
+            echo $SERVER_PASSWORD | sudo -S apt install -y apache2-utils
+          else
+              echo "✅ htpasswd already installed."
+          fi
+
+          # Create file .htpasswd with username & password from runner (Github) secrets
+          echo $SERVER_PASSWORD | sudo -S htpasswd -cb /etc/nginx/.htpasswd "$SERVER_USER" "$SERVER_PASSWORD"
+
+          # Create Nginx Configuration
           sudo tee "$NGINX_CONF" > /dev/null <<CONFIG
           server {
             listen 80;
