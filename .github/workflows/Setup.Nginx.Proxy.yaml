@@ -72,23 +72,23 @@ jobs:
             echo "🧱 Creating Nginx config for $DOMAIN ..."
             echo "$SERVER_PASSWORD" | sudo tee /etc/nginx/.htpasswd > /dev/null
             sudo tee "$NGINX_CONF" > /dev/null <<CONFIG
-server {
-  listen 80;
-  server_name $DOMAIN;
+            server {
+              listen 80;
+              server_name $DOMAIN;
 
-  location / {
-    proxy_pass http://localhost:$APP_PORT;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade \$http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host \$host;
-    proxy_cache_bypass \$http_upgrade;
+              location / {
+                proxy_pass http://localhost:$APP_PORT;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade \$http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host \$host;
+                proxy_cache_bypass \$http_upgrade;
 
-    auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/.htpasswd;
-  }
-}
-CONFIG
+                auth_basic "Restricted";
+                auth_basic_user_file /etc/nginx/.htpasswd;
+              }
+            }
+            CONFIG
 
             echo $SERVER_PASSWORD | sudo -S ln -sf $NGINX_CONF /etc/nginx/sites-enabled/app.conf
 
@@ -100,7 +100,7 @@ CONFIG
 
             echo "✅ Nginx has been configured and reloaded successfully."
             echo "🌐 Access your app at: http://$DOMAIN"
-EOF
+            EOF
 
       - name: Verify Nginx Status
         env:
