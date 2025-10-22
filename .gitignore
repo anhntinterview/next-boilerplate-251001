@@ -52,3 +52,6 @@ playwright.config.ts
 
 # vscode
 .vscode/launch.json
+
+#nginx
+nginx.conf
