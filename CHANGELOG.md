@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.13](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.12...v0.2.13) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** check & install htpasswd ([#92](https://github.com/anhntinterview/next-boilerplate-251001/issues/92)) ([e2239f2](https://github.com/anhntinterview/next-boilerplate-251001/commit/e2239f209bb623a1f9fd5c0d2286de8002a8dba3))
+
 ## [0.2.12](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.11...v0.2.12) (2025-10-22)
 
 
