@@ -42,7 +42,8 @@ jobs:
 
           CONTAINER_NAME="next-boilerplate-frontend"
           APP_PORT=3000
-          NGINX_CONF="/etc/nginx/sites-available/app.conf"
+          NGINX_CONF="/etc/nginx/sites-available/$DOMAIN.conf"
+          CERT_PATH="/etc/letsencrypt/live/$DOMAIN"
 
           echo "🔍 Checking if application container is running..."
           if ! docker ps --filter "name=$CONTAINER_NAME" --filter "status=running" | grep -q "$CONTAINER_NAME"; then
@@ -71,8 +72,18 @@ jobs:
             echo "✅ Nginx already installed."
           fi
 
+          echo "🔍 Checking Certbot installation..."
+          if ! command -v certbot &>/dev/null; then
+            echo "📦 Installing Certbot..."
+            echo $SERVER_PASSWORD | sudo -S apt update -y
+            echo $SERVER_PASSWORD | sudo -S apt install -y certbot python3-certbot-nginx
+            echo "✅ Certbot installed."
+          else
+            echo "✅ Certbot already installed."
+          fi
+
           # Check & install htpasswd
-          echo "🧱 Creating Nginx config for $DOMAIN ..."
+          echo "🧱 Creating Nginx config for \$DOMAIN ..."
           if ! command -v htpasswd &>/dev/null; then
             echo "📦 Installing apache2-utils for htpasswd..."
             echo $SERVER_PASSWORD | sudo -S apt update -y
@@ -86,12 +97,26 @@ jobs:
 
           # Create Nginx Configuration
           sudo tee "$NGINX_CONF" > /dev/null <<CONFIG
+          # Redirect HTTP -> HTTPS
           server {
             listen 80;
             server_name $DOMAIN;
+            return 301 https://\$host\$request_uri;
+          }
+          # HTTPS server
+          server {
+            listen 443 ssl http2;
+            server_name $DOMAIN;
 
+            # Certificate SSL/TLS
+            ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+            ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
+            include /etc/letsencrypt/options-ssl-nginx.conf;
+            ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+            # Proxy to Application (port 3000)
             location / {
-              proxy_pass http://localhost:$APP_PORT;
+              proxy_pass http://localhost:3000;
               proxy_http_version 1.1;
               proxy_set_header Upgrade \$http_upgrade;
               proxy_set_header Connection 'upgrade';
@@ -104,12 +129,30 @@ jobs:
           }
           CONFIG
 
-          echo $SERVER_PASSWORD | sudo -S ln -sf $NGINX_CONF /etc/nginx/sites-enabled/app.conf
+          echo $SERVER_PASSWORD | sudo -S ln -sf $NGINX_CONF /etc/nginx/sites-enabled/$DOMAIN
 
           echo "🔄 Testing Nginx configuration..."
           echo $SERVER_PASSWORD | sudo -S nginx -t
 
           echo "♻️ Reloading Nginx..."
+          echo $SERVER_PASSWORD | sudo -S systemctl reload nginx
+
+          # -----------------------------------------------------
+          # 🧩 NEW: Automatic SSL issue step
+          # -----------------------------------------------------
+          echo "🔍 Checking existing SSL certificate for $DOMAIN..."
+          if [ -d "$CERT_PATH" ] && [ -f "$CERT_PATH/fullchain.pem" ]; then
+            echo "✅ SSL certificate already exists at $CERT_PATH"
+          else
+            echo "📜 Requesting new SSL certificate for $DOMAIN..."
+            echo $SERVER_PASSWORD | sudo -S certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos -m roberthost.vn@gmail.com || {
+              echo "❌ Failed to issue SSL certificate. Check DNS and port 80 accessibility."
+              exit 1
+            }
+            echo "✅ SSL certificate successfully issued for \$DOMAIN"
+          fi
+
+          echo "♻️ Final Nginx reload..."
           echo $SERVER_PASSWORD | sudo -S systemctl reload nginx
 
           echo "✅ Nginx has been configured and reloaded successfully."
