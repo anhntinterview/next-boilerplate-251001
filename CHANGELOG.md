@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.18](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.17...v0.2.18) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** missing $ ([#102](https://github.com/anhntinterview/next-boilerplate-251001/issues/102)) ([047d9d4](https://github.com/anhntinterview/next-boilerplate-251001/commit/047d9d42f2776f244735e8e392916e81447c06ac))
+
 ## [0.2.17](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.16...v0.2.17) (2025-10-22)
 
 
