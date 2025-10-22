@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.16](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.15...v0.2.16) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** certbot re-implemented ([#98](https://github.com/anhntinterview/next-boilerplate-251001/issues/98)) ([3ec1af2](https://github.com/anhntinterview/next-boilerplate-251001/commit/3ec1af2a2a0a0bf789140d5930ef2c6ed7fba605))
+
 ## [0.2.15](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.14...v0.2.15) (2025-10-22)
 
 
