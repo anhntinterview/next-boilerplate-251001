@@ -48,7 +48,7 @@ jobs:
           CERT_PATH="/etc/letsencrypt/live/$DOMAIN"
 
           echo "🔍 Checking if application container is running..."
-          if ! docker ps --filter "name=$CONTAINER_NAME" --filter "status=running" | grep -q "$CONTAINER_NAME"; then
+          if ! docker ps --filter name="$CONTAINER_NAME" --filter "status=running" | grep -q "$CONTAINER_NAME"; then
             echo "❌ Container '\$CONTAINER_NAME' is not running. Aborting Nginx setup."
             exit 1
           fi
