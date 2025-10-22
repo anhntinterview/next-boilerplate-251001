@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.14](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.13...v0.2.14) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** update sub domain NGINX ([#94](https://github.com/anhntinterview/next-boilerplate-251001/issues/94)) ([d1d0b9f](https://github.com/anhntinterview/next-boilerplate-251001/commit/d1d0b9f3464342c573a3757a72d2b43b37c728a6))
+
 ## [0.2.13](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.12...v0.2.13) (2025-10-22)
 
 
