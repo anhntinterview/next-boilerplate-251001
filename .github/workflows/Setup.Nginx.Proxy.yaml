@@ -70,7 +70,7 @@ jobs:
           fi
 
           echo "🧱 Creating Nginx config for $DOMAIN ..."
-          echo "$SERVER_PASSWORD" | sudo tee /etc/nginx/.htpasswd > /dev/null
+          echo "$SERVER_PASSWORD" | sudo -S tee /etc/nginx/.htpasswd > /dev/null
           sudo tee "$NGINX_CONF" > /dev/null <<CONFIG
           server {
             listen 80;
@@ -107,7 +107,7 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           echo "🔎 Checking Nginx service status..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" <<'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s -- "$SERVER_PASSWORD" << 'EOF'
             set -e
 
             SERVER_PASSWORD="$1"
