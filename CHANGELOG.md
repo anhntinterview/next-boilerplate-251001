@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.11](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.10...v0.2.11) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** missing word + wrong syntax ([#88](https://github.com/anhntinterview/next-boilerplate-251001/issues/88)) ([0fd1994](https://github.com/anhntinterview/next-boilerplate-251001/commit/0fd19949e6c9b6819271df21d27be97081fc0c48))
+
 ## [0.2.10](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.9...v0.2.10) (2025-10-22)
 
 
