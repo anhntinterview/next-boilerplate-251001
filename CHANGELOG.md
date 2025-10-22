@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.15](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.14...v0.2.15) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** missing .conf ([#96](https://github.com/anhntinterview/next-boilerplate-251001/issues/96)) ([dae222d](https://github.com/anhntinterview/next-boilerplate-251001/commit/dae222d786ea2f91ce9f8b35a8fdcb004b97c264))
+
 ## [0.2.14](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.13...v0.2.14) (2025-10-22)
 
 
