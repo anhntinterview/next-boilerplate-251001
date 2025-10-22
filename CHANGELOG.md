@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.10](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.9...v0.2.10) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** update setup nginx here-doc ([#86](https://github.com/anhntinterview/next-boilerplate-251001/issues/86)) ([faa0d7f](https://github.com/anhntinterview/next-boilerplate-251001/commit/faa0d7f6c0e35d80f97e41e0d33bd6d66602a555))
+
 ## [0.2.9](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.8...v0.2.9) (2025-10-21)
 
 
