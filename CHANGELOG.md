@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.12](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.11...v0.2.12) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** mising -S option to inject password ([#90](https://github.com/anhntinterview/next-boilerplate-251001/issues/90)) ([68f3e10](https://github.com/anhntinterview/next-boilerplate-251001/commit/68f3e102211d732d8f7d7872f3848cbc022789c2))
+
 ## [0.2.11](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.10...v0.2.11) (2025-10-22)
 
 
