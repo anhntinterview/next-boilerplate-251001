@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.17](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.16...v0.2.17) (2025-10-22)
+
+
+### Bug Fixes
+
+* **ci:** double quote only $CONTAINER_NAME ([#100](https://github.com/anhntinterview/next-boilerplate-251001/issues/100)) ([1513aab](https://github.com/anhntinterview/next-boilerplate-251001/commit/1513aabefeb3b50ee8c48d46b8920b4314458455))
+
 ## [0.2.16](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.15...v0.2.16) (2025-10-22)
 
 
