@@ -1,0 +1,65 @@
+name: Deploy.NR.Components
+
+on:
+    workflow_dispatch:
+    pull_request:
+        paths:
+            - .github/newrelic/**
+            - .github/workflows/Deploy.NR.Components.yaml
+    push:
+        branches:
+            - main
+        paths:
+            - .github/newrelic/**
+            - .github/workflows/Deploy.NR.Components.yaml
+            - .release-please-manifest.json
+
+env:
+    TF_WORKING_DIR: .github/newrelic
+    RF_VARS_FILE: .github/newlrelic/terraform.tfvars
+    TF_VERSION: ${{ vars.TF_MAIN_VERSION || '1.9.7' }}
+
+jobs:
+    terrform:
+        name: Terraform Apply (New Relic)
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+              with:
+                  terraform_version: ${{ env.TF_VERSION }}
+
+            - name: Terraform Init
+              working-directory: ${{ env.TF_WORKING_DIR }}
+              run: terraform init -input=false
+
+            - name: Terraform Validate
+              working-directory: ${{ env.TF_WORKING_DIR }}
+              run: terraform validate
+
+            - name: Terraform Plan
+              working-directory: ${{ env.TF_WORKING_DIR }}
+              env:
+                  NEW_RELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
+                  NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+              run: terraform plan -var-file=terraform.tfvars
+
+            - name: Terraform Apply
+              if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+              working-directory: ${{ env.TF_WORKING_DIR }}
+              env:
+                  NEW_RELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
+                  NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+              run: terraform apply -auto-approve -var-file=terraform.tfvars
+
+            - name: Notify
+              if: always()
+              run: |
+                  echo "Deployment finished for $GITHUB_REF"
