@@ -36,7 +36,7 @@ jobs:
             --arg commit "$COMMIT_SHA" \
             --arg deeplink "$DEEPLINK" \
             --arg repo "$REPO" \
-            '{ deployment: 
+            '{ deployment:
                 {
                     revision: $version,
                     changelog: ("https://github.com/" + $repo + "/blob/main/CHANGELOG.md"),
@@ -48,8 +48,8 @@ jobs:
                         environment: $env,
                         region: $region,
                         version: $version
-                    } 
-                } 
+                    }
+                }
             }')
           # Send API request
           curl -X POST "https://api.newrelic.com/v2/applications.json" \
