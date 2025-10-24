@@ -1,0 +1,58 @@
+name: NR.Change.Tracking
+
+on:
+    workflow_dispatch:
+    repository_dispatch:
+        types: [tracking-newrelic]
+
+jobs:
+    nr-change-tracking:
+        name: Report Deployment to New Relic
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository =
+              uses: actions/checkout@v4
+
+            - name: Report deployment to New Relic
+              env:
+                  NR_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
+                  NR_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+                  APPLICATION_NAME: ${{ github.event.client_payload.application_name }}
+                  ENVIRONMENT: ${{ github.event.client_payload.env }}
+                  REGION: ${{ github.event.client_payload.region }}
+                  VERSION: ${{ github.event.client_payload.ref }}
+                  COMMIT_SHA: ${{ github.event.client_payload.sha }}
+                  DEEPLINK: ${{ github.event.client_payload.deeplink }}
+                  REPO: ${{ github.repository }}
+              run: |
+                  echo "🚀 Sending deployment event to New Relic..."
+                  # Define payload
+                  PAYLOAD=$(jq -n \
+                    --arg app "$APPLICATION_NAME" \
+                    --arg env "$ENVIRONMENT" \
+                    --arg region "$REGION" \
+                    --arg version "$VERSION" \
+                    --arg commit "$COMMIT_SHA" \
+                    --arg deeplink "$DEEPLINK" \
+                    --arg repo "$REPO" \
+                    '{ deployment: 
+                        {
+                            revision: $version,
+                            changelog: ("https://github.com/" + $repo + "/blob/main/CHANGELOG.md"),
+                            description: ("Deployment to " + $env + " (" + $region + ")"),
+                            user: "github-actions",
+                            commit: $commit,
+                            deeplink: $deeplink,
+                            metadata: {
+                                environment: $env,
+                                region: $region,
+                                version: $version
+                            } 
+                        } 
+                    }')
+                  # Send API request
+                  curl -X POST "https://api.newrelic.com/v2/applications.json" \
+                  -H "Api-Key:${NR_API_KEY}" \
+                  -H "Content-Type: application/json" \
+                  -d "$PAYLOAD" echo "✅ Deployment reported to New Relic for ${APPLICATION_NAME} (${ENVIRONMENT})"

@@ -2,6 +2,21 @@ name: Setup.Nginx.Proxy
 
 on:
   workflow_dispatch:
+    inputs:
+      application_name:
+        description: "Application name"
+        required: true
+      env:
+        description: ".env"
+        required: true
+        type: choice
+        options: [dev, stage, prod]
+      region:
+        description: "Region"
+        default: "eu-west-1"
+      version:
+        description: "Version"
+        required: true
   repository_dispatch:
     types: [setup-nginx]
 
@@ -202,3 +217,14 @@ jobs:
             fi
             echo "✅ Nginx service is active."
           EOF
+
+      - name: Deploy New Relic Components
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: deploy-newrelic
+          client-payload: |
+            {
+              "ref": "${{ github.event.client_payload.ref }}",
+            }
