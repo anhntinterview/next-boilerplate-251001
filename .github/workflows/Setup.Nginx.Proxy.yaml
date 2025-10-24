@@ -226,5 +226,10 @@ jobs:
           event-type: deploy-newrelic
           client-payload: |
             {
-              "ref": "${{ github.event.client_payload.ref }}",
+              "ref": "${{ github.event.client_payload.ref }}"
             }
+
+      - name: Web Content Accessibility Guide (WCAG)
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: wcag

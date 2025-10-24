@@ -1,0 +1,46 @@
+name: Accessibility (WCAG) Audit
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [wcag]
+
+jobs:
+  accessibility-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧩 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧠 Install axe CLI
+        run: npm install -g @axe-core/cli
+
+      - name: 🧪 Run accessibility tests
+        run: |
+          mkdir -p reports
+          npx axe https://next.ssrengineering.tech --save reports/axe-report.json --timeout 60000
+        env:
+          NODE_ENV: test
+
+      - name: 📋 Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe-accessibility-report
+          path: reports/axe-report.json
+
+      - name: 📡 Send results to New Relic
+        if: always()
+        env:
+          NEWRELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
+          NEWRELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+        run: |
+          node .github/scripts/sendToNewRelic.js
