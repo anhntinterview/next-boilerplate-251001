@@ -88,5 +88,5 @@ jobs:
           event-type: setup-nginx
           client-payload: |
             {
-              "ref": "${{ github.event.client_payload.ref }}",
+              "ref": "${{ github.event.client_payload.ref }}"
             }
