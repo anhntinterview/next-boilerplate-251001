@@ -55,3 +55,21 @@ playwright.config.ts
 
 #nginx
 nginx.conf
+
+# === Terraform core directories ===
+**/.terraform/          # Local plugin & module cache (auto-generated)
+**/.terraform.lock.hcl  # Provider dependency lock file (optional — see note below)
+
+# === Terraform state files ===
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+
+# === Terraform plan/output files ===
+*.tfplan
+crash.log
+
+# === Sensitive variables ===
+**/terraform.tfvars        # Contains credentials or configuration data (if sensitive)
+*.auto.tfvars
