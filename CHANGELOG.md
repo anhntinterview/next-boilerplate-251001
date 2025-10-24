@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.18...v0.3.0) (2025-10-24)
+
+
+### Features
+
+* **ci:** create newrelic tracking changed ([#106](https://github.com/anhntinterview/next-boilerplate-251001/issues/106)) ([5b1990b](https://github.com/anhntinterview/next-boilerplate-251001/commit/5b1990bf2dd9f8613dfacd5941abe030eac62e9d))
+
 ## [0.2.18](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.17...v0.2.18) (2025-10-22)
 
 
