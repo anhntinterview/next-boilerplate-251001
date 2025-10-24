@@ -1,7 +1,9 @@
 name: Deploy.NR.Components
 
 on:
-  workflow_call:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [deploy-newrelic]
 
 env:
   TF_WORKING_DIR: .github/newrelic
@@ -32,12 +34,19 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform validate
 
-      - name: Terraform Plan
+      - name: Terraform Plan (Check for Changes)
+        id: plan
         working-directory: ${{ env.TF_WORKING_DIR }}
         env:
           NEW_RELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
           NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-        run: terraform plan
+        run: |
+          set +e
+          terraform plan -detailed-exitcode -no-color -input=false
+          exit_code=$?
+          echo "Terraform plan exit code: $exit_code"
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -45,9 +54,29 @@ jobs:
         env:
           NEW_RELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
           NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -input=false
+
+      - name: Skip Apply (No changes)
+        if: steps.plan.outputs.exit_code == '0'
+        run: echo "✅ No changes detected — skipping Terraform apply."
 
       - name: Notify
         if: always()
         run: |
           echo "Deployment finished for $GITHUB_REF"
+
+      - name: Trigger NR.Change.Tracking
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: tracking-newrelic
+          client-payload: |
+            {
+              "application_name": "${{ secrets.CONTAINER_NAME }}",
+              "env": "prod",
+              "region": "us",
+              "sha": "${{ github.sha }}",
+              "deeplink": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "ref": "${{ github.event.client_payload.ref }}"
+            }

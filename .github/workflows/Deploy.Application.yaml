@@ -86,3 +86,7 @@ jobs:
           token: ${{ secrets.REPO_DISPATCH_TOKEN }}
           repository: ${{ github.repository }}
           event-type: setup-nginx
+          client-payload: |
+            {
+              "ref": "${{ github.event.client_payload.ref }}",
+            }
