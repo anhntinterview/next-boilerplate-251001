@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.3.0...v0.4.0) (2025-10-24)
+
+
+### Features
+
+* **ci:** implement WCAG + fix JSON format ([#108](https://github.com/anhntinterview/next-boilerplate-251001/issues/108)) ([8ec1ab1](https://github.com/anhntinterview/next-boilerplate-251001/commit/8ec1ab114d527464b7e3ce22c0c887f60ee1ab54))
+
 ## [0.3.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.2.18...v0.3.0) (2025-10-24)
 
 
