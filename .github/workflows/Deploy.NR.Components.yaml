@@ -77,6 +77,6 @@ jobs:
               "env": "prod",
               "region": "us",
               "sha": "${{ github.sha }}",
-              "deeplink": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "deeplink": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
               "ref": "${{ github.event.client_payload.ref }}"
             }
