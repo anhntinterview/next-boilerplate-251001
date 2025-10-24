@@ -45,7 +45,7 @@ jobs:
           terraform plan -detailed-exitcode -no-color -input=false
           exit_code=$?
           echo "Terraform plan exit code: $exit_code"
-          echo "exit_code=$exit_code" >> $GITHUB_OUTPUT
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
           exit 0
 
       - name: Terraform Apply
@@ -78,6 +78,5 @@ jobs:
               "region": "us",
               "sha": "${{ github.sha }}",
               "deeplink": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-              "version": "${{ github.event.inputs.version }}",
               "ref": "${{ github.event.client_payload.ref }}"
             }
