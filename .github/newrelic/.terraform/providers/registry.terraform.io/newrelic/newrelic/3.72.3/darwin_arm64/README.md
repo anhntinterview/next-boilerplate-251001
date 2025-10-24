@@ -44,11 +44,11 @@ Should you need assistance with New Relic products, you are in good hands with s
 
 **Support Channels**
 
-* [New Relic Documentation](https://registry.terraform.io/providers/newrelic/newrelic/latest/docs): Comprehensive guidance for using our Terraform provider
-* [New Relic Community](https://discuss.newrelic.com/tag/terraform): The best place to engage in troubleshooting questions
-* [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
-* [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
-* [New Relic Technical Support](https://support.newrelic.com/) 24/7/365 ticketed support. Read more about our [Technical Support Offerings](https://docs.newrelic.com/docs/licenses/license-information/general-usage-licenses/global-technical-support-offerings).
+- [New Relic Documentation](https://registry.terraform.io/providers/newrelic/newrelic/latest/docs): Comprehensive guidance for using our Terraform provider
+- [New Relic Community](https://discuss.newrelic.com/tag/terraform): The best place to engage in troubleshooting questions
+- [New Relic Developer](https://developer.newrelic.com/): Resources for building a custom observability applications
+- [New Relic University](https://learn.newrelic.com/): A range of online training for New Relic users of every level
+- [New Relic Technical Support](https://support.newrelic.com/) 24/7/365 ticketed support. Read more about our [Technical Support Offerings](https://docs.newrelic.com/docs/licenses/license-information/general-usage-licenses/global-technical-support-offerings).
 
 ## Developing the Provider
 
@@ -68,4 +68,3 @@ is not supported by the larger Go community. Please see the [Go releases][go_rel
 [provider_docs]: https://www.terraform.io/docs/providers/newrelic/index.html
 [contributing]: https://github.com/newrelic/terraform-provider-newrelic/blob/main/CONTRIBUTING.md
 [go_releases]: https://github.com/golang/go/wiki/Go-Release-Cycle
-
