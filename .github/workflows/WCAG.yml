@@ -27,7 +27,10 @@ jobs:
       - name: 🧪 Run accessibility tests
         run: |
           mkdir -p reports
-          npx axe https://next.ssrengineering.tech --save reports/axe-report.json --timeout 60000
+          npx browser-driver-manager install chrome
+          npx axe https://next.ssrengineering.tech \
+          --save reports/axe-report.json \
+          --timeout 60000
         env:
           NODE_ENV: test
 

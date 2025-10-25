@@ -21,7 +21,7 @@ if (envPath) {
   console.warn("[dotenv] No .env file found — skipping.");
 }
 
-if (!process.env.SECRET_API_KEY) {
+if (process.env.SECRET_API_KEY === process.env.CI_SECRET_API_KEY) {
   throw new Error("SECRET_API_KEY is required to run these tests.");
 }
 

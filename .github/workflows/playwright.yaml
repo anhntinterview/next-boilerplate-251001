@@ -61,6 +61,8 @@ jobs:
 
       - name: Run Playwright test (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
         run: npm run test:playwright -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} -c ./playwright.github.config.ts
+        env:
+          CI_SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
 
       - name: Upload Playwright artifacts (Shard ${{ matrix.shardIndex }})
         if: always()
