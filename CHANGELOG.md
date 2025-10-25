@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.5.0...v0.5.1) (2025-10-25)
+
+
+### Bug Fixes
+
+* **ci:** update script send report of axe-core to newrelic ([#114](https://github.com/anhntinterview/next-boilerplate-251001/issues/114)) ([bafec47](https://github.com/anhntinterview/next-boilerplate-251001/commit/bafec4762434c4261d578f5f894a1000222828c4))
+
 ## [0.5.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.4.1...v0.5.0) (2025-10-25)
 
 
