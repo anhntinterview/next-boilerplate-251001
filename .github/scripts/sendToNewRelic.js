@@ -12,7 +12,7 @@ const data = JSON.parse(fs.readFileSync(reportPath, "utf8"));
 const violations = data.violations?.length ?? 0;
 
 const accountId = process.env.NEWRELIC_ACCOUNT_ID;
-const apiKey = process.env.NEWRELIC_API_KEY;
+const insertKey = process.env.NEWRELIC_INSERT_KEY;
 
 try {
   await axios.post(
@@ -28,7 +28,7 @@ try {
     {
       headers: {
         "Content-Type": "application/json",
-        "X-Insert-Key": apiKey,
+        "X-Insert-Key": insertKey,
       },
     },
   );
