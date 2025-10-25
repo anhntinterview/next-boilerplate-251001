@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.4.1...v0.5.0) (2025-10-25)
+
+
+### Features
+
+* **ci:** instead of using RESTful to send json in Newrelic, using GraphQL is modern method + adapt install fit Chromium version ([#112](https://github.com/anhntinterview/next-boilerplate-251001/issues/112)) ([4065bda](https://github.com/anhntinterview/next-boilerplate-251001/commit/4065bdadb0582c2b835dfe5651ac2438d5e7b309))
+
 ## [0.4.1](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.4.0...v0.4.1) (2025-10-25)
 
 
