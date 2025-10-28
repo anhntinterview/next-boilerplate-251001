@@ -64,7 +64,6 @@ jobs:
             TAG="$1"
             CONTAINER_NAME="$2"
             APP_PORT="$3"
-            
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             set -e
 
