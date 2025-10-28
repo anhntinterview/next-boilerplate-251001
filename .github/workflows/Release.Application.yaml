@@ -14,19 +14,19 @@ on:
     branches:
       - main
     # Optional: only trigger if relevant files changed
-    # paths:
-    #   - "Release.Application.yaml"
-    #   - "src/**"
-    #   - "release-please-config.json"
-    #   - ".release-please-manifest.json"
-    #   - "index.html"
-    #   - "package.json"
-    #   - "package-lock.json"
-    #   - "tsconfig.json"
-    #   - "tsconfig.node.json"
-    #   - ".npmrc"
-    #   - ".nvmrc"
-    #   - "vite.config.ts"
+    paths:
+      - "Release.Application.yaml"
+      - "src/**"
+      - "release-please-config.json"
+      - ".release-please-manifest.json"
+      - "index.html"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "tsconfig.node.json"
+      - ".npmrc"
+      - ".nvmrc"
+      - "vite.config.ts"
 
 concurrency:
   group: release-${{ github.ref }}
@@ -80,7 +80,6 @@ jobs:
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows-v2
     with:
       dockerfile_path: ./Dockerfile
-      image_name: next-boilerplate-251001
       image_tag: ${{ needs.release.outputs.docker_tag }}
       run_docker_publish: true
       image_subdirectory: "."

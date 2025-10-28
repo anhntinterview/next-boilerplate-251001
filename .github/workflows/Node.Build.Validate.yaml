@@ -41,7 +41,6 @@ jobs:
     uses: anhntinterview/next-boilerplate-251001/.github/workflows/Docker.Build.Publish.yaml@ci/setup-workflows-v2
     with:
       dockerfile_path: ./Dockerfile
-      image_name: next-boilerplate-251001
       image_tag: v0.1.0
       run_docker_publish: true
       image_subdirectory: .
