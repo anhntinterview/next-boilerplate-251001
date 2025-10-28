@@ -19,6 +19,9 @@ on:
         required: false
         default: true
         type: boolean
+    secrets:
+      CONTAINER_NAME:
+        required: false
 jobs:
   docker-build-publish:
     runs-on: ubuntu-latest
