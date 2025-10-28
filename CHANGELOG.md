@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.5.1...v0.5.2) (2025-10-25)
+
+
+### Bug Fixes
+
+* **ci:** change user key to license/insert key in newrelic ([#116](https://github.com/anhntinterview/next-boilerplate-251001/issues/116)) ([6f2ba3b](https://github.com/anhntinterview/next-boilerplate-251001/commit/6f2ba3b40f37f246dcdd2525b1440e3ecf99bd2f))
+
 ## [0.5.1](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.5.0...v0.5.1) (2025-10-25)
 
 

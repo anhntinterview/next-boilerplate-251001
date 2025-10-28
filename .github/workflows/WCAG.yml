@@ -43,7 +43,7 @@ jobs:
       - name: 📡 Send results to New Relic
         if: always()
         env:
-          NEWRELIC_API_KEY: ${{ secrets.NR_PLATFORM_US_USER_API_KEY }}
+          NEWRELIC_INSERT_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }} # INSERT KEY = LICENSE KEY
           NEWRELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
         run: |
           node .github/scripts/sendToNewRelic.js
