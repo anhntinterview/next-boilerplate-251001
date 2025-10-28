@@ -38,36 +38,44 @@ jobs:
 
       # ✅ Pull the new Docker image on remote server
       - name: Pull latest Docker image
+        env:
+          CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: |
           REF="${{ github.event.client_payload.ref }}"
           TAG="${REF#v}"
           echo "🔄 Pulling Docker image for version: $TAG"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" "$CONTAINER_NAME" <<'EOF'
             TAG="$1"
+            CONTAINER_NAME="$2"
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
-            docker pull ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
+            docker pull ghcr.io/${{ github.repository_owner }}/$CONTAINER_NAME:$TAG
           EOF
 
       # ✅ Deploy container (stop old, start new)
       - name: Deploy container
+        env:
+          CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: |
           REF="${{ github.event.client_payload.ref }}"
           TAG="${REF#v}"
           echo "🚀 Deploying version: $TAG"
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" << 'EOF'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$TAG" "$CONTAINER_NAME" <<'EOF'
             TAG="$1"
+            CONTAINER_NAME="$2"
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin &&
             set -e
             echo "🛑 Stopping old container (if exists)..."
-            docker stop next-boilerplate-frontend 2>/dev/null || true
-            docker rm next-boilerplate-frontend 2>/dev/null || true
+            docker stop $CONTAINER_NAME 2>/dev/null || true
+            docker rm $CONTAINER_NAME 2>/dev/null || true
+            echo "🛑 Remove old images (if exists)..."
+            docker images | grep $CONTAINER_NAME | awk '{print \$3}' | xargs docker rmi -f >/dev/null 2>&1 || true
 
             echo "🚢 Starting new container..."
             docker run -d \
-              --name next-boilerplate-frontend \
+              --name $CONTAINER_NAME \
               --restart=always \
               -p 3000:3000 \
-              ghcr.io/${{ github.repository_owner }}/next-boilerplate-251001:$TAG
+              ghcr.io/${{ github.repository_owner }}/$CONTAINER_NAME:$TAG
 
             echo "🧹 Cleaning up old images..."
             docker image prune -f
@@ -75,11 +83,14 @@ jobs:
 
       # ✅ Verify the new container is running and healthy
       - name: Verify deployment
+        env:
+          CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: |
           echo "✅ Verifying deployment..."
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-            docker ps --filter name=next-boilerplate-frontend --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
-          "
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} bash -s "$CONTAINER_NAME" <<'EOF'
+            CONTAINER_NAME="$1"
+            docker ps --filter name="$CONTAINER_NAME" --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
+          EOF
       - name: Setup Nginx Reverse Proxy (if needed)
         uses: peter-evans/repository-dispatch@v3
         with:
