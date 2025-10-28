@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.3](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.5.2...v0.5.3) (2025-10-28)
+
+
+### Bug Fixes
+
+* **ci:** can not use secret variable in shell run: directly ([#119](https://github.com/anhntinterview/next-boilerplate-251001/issues/119)) ([f40db62](https://github.com/anhntinterview/next-boilerplate-251001/commit/f40db62485089525b4f5175113a76f4ff48db0da))
+* **ci:** miss secrets variable at sub workflow (Docker.Build.Publish.yaml) ([#121](https://github.com/anhntinterview/next-boilerplate-251001/issues/121)) ([9c1c8d2](https://github.com/anhntinterview/next-boilerplate-251001/commit/9c1c8d2e9104d77ef1284bafbd81b629256efb51))
+* **ci:** substitute plain text to $CONTAINER_NAME ([#118](https://github.com/anhntinterview/next-boilerplate-251001/issues/118)) ([00562c7](https://github.com/anhntinterview/next-boilerplate-251001/commit/00562c72622d030b6e760c32776855826f174788))
+* **ci:** substitute secrets variable to plain text ([#120](https://github.com/anhntinterview/next-boilerplate-251001/issues/120)) ([a5cbbcf](https://github.com/anhntinterview/next-boilerplate-251001/commit/a5cbbcf809c91d00587c14b945b6e7e744cdf3d1))
+
 ## [0.5.2](https://github.com/anhntinterview/next-boilerplate-251001/compare/v0.5.1...v0.5.2) (2025-10-25)
 
 
